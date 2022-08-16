@@ -2,22 +2,20 @@ import os
 import pymongo
 from pymongo import MongoClient
 from flask import Flask
-from .mongoDbSettings import CONN_STRING
+from mongoDbSettings import CONN_STRING
 
 
 def getDb():
     client = MongoClient(CONN_STRING)
+    db = client.flask_db
+    return db
 
 
 def webApp():
     app = Flask(__name__)
-
-    
-
+    db = getDb()
+    print(db)
     return app
-
-
-client = 
 
 
 if __name__ == "__main__":

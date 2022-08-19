@@ -1,8 +1,8 @@
 import os
 import configparser
 from flask import Flask
-from flask_pymongo import PyMongo
 from flask_cors import CORS
+from funcDB import mongo
 
 
 config = configparser.ConfigParser()
@@ -14,6 +14,6 @@ def webApp():
     app = Flask(__name__)
     app.config['DEBUG'] = True
     app.config['MONGO_URI'] = config['TEST']['DB_URI']
-    PyMongo().init_app(app)
+    mongo.init_app(app)
     CORS().init_app(app)
     return app

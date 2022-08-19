@@ -1,0 +1,44 @@
+{
+    "userId": "user1",
+    "profile": {
+        "name": "Daniel",
+        "email": "test@email.com"
+    },
+    "userBags": [
+        {
+            "bagId": "bag1",
+            "bagSize": 35,
+            "bagName": "Test Bag 01"
+        },
+        {
+            "bagId": "bag2",
+            "bagSize": 35,
+            "bagName": "Test Bag 02"
+        }
+    ],
+    "userItem": [
+        {
+            "itemId": "item1",
+            "itemName": "bottle"
+        },
+        {
+            "itemId": "item1",
+            "itemName": "torch"
+        },
+        {
+            "itemId": "item1",
+            "itemName": "medkit"
+        }
+    ],
+    "userTrips": [
+        {
+            "tripId": "trip1",
+            "destination": "Madrid"
+        },
+        {
+            "tripId": "trip2",
+            "destination": "Madrid"
+        }
+    ]
+      
+}

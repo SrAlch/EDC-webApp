@@ -1,7 +1,16 @@
+from os.path import join, dirname, abspath
+import json
+import uuid
+import bson
 from flask_pymongo import PyMongo
 
+BACKEND_FOLDER = (dirname(abspath(__file__)))
 
 mongo = PyMongo()
+
+jsonDB = {"_id": bson.Binary.from_uuid(uuid.uuid1())}
+with open(join(BACKEND_FOLDER, "dbFill.json"), "r") as f:
+    jsonDB.update(json.loads(f.read()))
 
 
 def createDB():
@@ -12,14 +21,7 @@ def createDB():
         print("Already exist")
     else:
         print("Creating db ...")
-        mongoColl.insert_one({'userId': "user1",
-                              'userName': "Daniel",
-                              'userTrips': [{'tripId': "trip1",
-                                             'destination': "Madrid"}],
-                              'userBags': [{'bagId': "bag1",
-                                            'bagSize': 35}],
-                              'userItems': [{'itemId': "item1",
-                                             'itemName': "bottle"}]})
+        mongoColl.insert_one(jsonDB)
 
 
 def findUser(user="user1"):

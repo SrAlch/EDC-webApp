@@ -5,9 +5,9 @@ from flask_cors import CORS
 from funcDB import mongo
 
 
+BACKEND_FOLDER = (os.path.dirname(os.path.abspath(__file__)))
 config = configparser.ConfigParser()
-localFolder = (os.path.dirname(os.path.abspath(__file__)))
-config.read(os.path.join(localFolder, "webApp.ini"))
+config.read(os.path.join(BACKEND_FOLDER, "webApp.ini"))
 
 
 def webApp():

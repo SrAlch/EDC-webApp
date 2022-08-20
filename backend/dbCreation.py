@@ -42,8 +42,3 @@ def createDB():
                                  uuidUserString)
         else:
             createCollection(uuidUserString, collName, jsonData)
-
-
-def findUser(user="user1"):
-    result = MONGO.db.users.find({'userId': user})
-    return result

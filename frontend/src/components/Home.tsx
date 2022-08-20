@@ -2,15 +2,16 @@ import React from 'react';
 
 
 // Hooks modules
-import { useTestFetch } from '../hooks/test';
+// import { useTestFetch } from '../hooks/test';
+import { useDataFetch } from '../hooks/useDataFetch';
 
 const Home: React.FC = () => {
     const {
-        test,
-        setTest
-    } = useTestFetch();
+        user,
+        setUser
+    } = useDataFetch();
     return (
-        <div>{test.name}{test.address}</div>
+        <div>{user._id} {user.name} {user.email} {user.userId}</div>
     );
 };
 

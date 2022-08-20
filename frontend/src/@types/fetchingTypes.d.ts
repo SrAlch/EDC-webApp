@@ -14,16 +14,9 @@ export type Item = {
     itemName: string
 }
 
-export type Profile = {
-    name: string,
-    email: string
-}
-
-export type FullUser = {
+export type User = {
     _id: string,
     userId: string,
-    profile: Profile,
-    userBags: Bag[],
-    userItems: Item[],
-    userTrips: Trip[]
+    name: string,
+    email: string
 }

@@ -2,7 +2,7 @@ import os
 import configparser
 from flask import Flask
 from flask_cors import CORS
-from funcDB import MONGO
+from dbCreation import MONGO
 
 
 BACKEND_FOLDER = (os.path.dirname(os.path.abspath(__file__)))

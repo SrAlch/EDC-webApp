@@ -1,11 +1,12 @@
 from bson import json_util
 import app
 from flask import jsonify
-import funcDB
+import dbCreation
+import dbFunct
 
 appInst = app.webApp()
 
-funcDB.createDB()
+dbCreation.createDB()
 
 
 @appInst.route("/")
@@ -15,15 +16,17 @@ def home():
 
 @appInst.route("/trips", methods=["GET"])
 def getTrips():
-    tripDict = funcDB.findUser()
+    tripDict = dbFunct.findUser()
     return json_util.dumps(tripDict)
 
 
 @appInst.route("/test", methods=["GET"])
 def test():
-    testDict = {'name': "Pepe",
+    """testDict = {'name': "Pepe",
                 'address': "56 Flopington Avenue"}
-    return jsonify(testDict)
+    return jsonify(testDict)"""
+    tripDict = dbFunct.findUser()
+    return json_util.dumps(tripDict[0])
 
 
 appInst.run()

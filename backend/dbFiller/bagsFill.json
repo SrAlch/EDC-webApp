@@ -1,0 +1,10 @@
+{
+    "bag01":
+        {"bagId": "bag1",
+        "bagSize": 35,
+        "bagName": "Test Bag 01"},
+    "bag02":
+        {"bagId": "bag2",
+        "bagSize": 35,
+        "bagName": "Test Bag 02"}
+}

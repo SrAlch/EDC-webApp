@@ -1,0 +1,10 @@
+{
+    "trip01":{
+    "tripId": "trip1",
+    "destination": "Madrid"
+    },
+    "trip02":{
+    "tripId": "trip2",
+    "destination": "Madrid"
+    }
+}

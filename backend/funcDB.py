@@ -1,28 +1,49 @@
 from os.path import join, dirname, abspath
+import os
 import json
 import uuid
 from flask_pymongo import PyMongo
 
-BACKEND_FOLDER = (dirname(abspath(__file__)))
+DBFILLER_FOLDER = join(dirname(abspath(__file__)), "dbFiller")
+MONGO = PyMongo()
 
-mongo = PyMongo()
 
-jsonDB = {"_id": str(uuid.uuid1())}
-with open(join(BACKEND_FOLDER, "dbFill.json"), "r") as f:
-    jsonDB.update(json.loads(f.read()))
+def createCollection(uuidInput, collName, jsonFile, uuidDependency=None):
+    mongodb = MONGO.db
+    fieldName = f"{collName[0:-1]}Id"
+    check = mongodb[collName].find({fieldName: jsonFile[fieldName]})
+    if len(list(check)) <= 0:
+        if uuidDependency is not None:
+            finalDict = {"_id": uuidInput, "ownerId": uuidDependency}
+            finalDict.update(jsonFile)
+        else:
+            finalDict = {"_id": uuidInput}
+            finalDict.update(jsonFile)
+        mongodb[collName].insert_one(finalDict)
+
+
+def getJsonData(fileName):
+    with open(join(DBFILLER_FOLDER, fileName), "r") as f:
+        return json.loads(f.read())
 
 
 def createDB():
-    mongoColl = mongo.db.users
-    check = mongoColl.find({'userId': "user1"})
-
-    if len(list(check)) > 0:
-        print("Already exist")
-    else:
-        print("Creating db ...")
-        mongoColl.insert_one(jsonDB)
+    fileList = os.listdir(DBFILLER_FOLDER)
+    uuidUserString = str(uuid.uuid1())
+    for file in fileList:
+        collName = file.replace("Fill.json", "")
+        jsonData = getJsonData(file)
+        if "user" not in file:
+            for j in jsonData:
+                uuidString = str(uuid.uuid1())
+                createCollection(uuidString,
+                                 collName,
+                                 jsonData[j],
+                                 uuidUserString)
+        else:
+            createCollection(uuidUserString, collName, jsonData)
 
 
 def findUser(user="user1"):
-    result = mongo.db.users.find({'userId': user})
+    result = MONGO.db.users.find({'userId': user})
     return result

@@ -1,0 +1,14 @@
+{
+    "item01":{
+    "itemId": "item1",
+    "itemName": "bottle"
+    },
+    "item02":{
+    "itemId": "item2",
+    "itemName": "torch"
+    },
+    "item03":{
+    "itemId": "item3",
+    "itemName": "medkit"
+    }
+}

@@ -1,14 +1,13 @@
 from os.path import join, dirname, abspath
 import json
 import uuid
-import bson
 from flask_pymongo import PyMongo
 
 BACKEND_FOLDER = (dirname(abspath(__file__)))
 
 mongo = PyMongo()
 
-jsonDB = {"_id": bson.Binary.from_uuid(uuid.uuid1())}
+jsonDB = {"_id": str(uuid.uuid1())}
 with open(join(BACKEND_FOLDER, "dbFill.json"), "r") as f:
     jsonDB.update(json.loads(f.read()))
 

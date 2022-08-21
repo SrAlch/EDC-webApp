@@ -3,6 +3,8 @@ import os
 import json
 import uuid
 from flask_pymongo import PyMongo
+from dbFunct import addNewItem
+from dtos.itemDto import ItemDto
 
 DBFILLER_FOLDER = join(dirname(abspath(__file__)), "dbFiller")
 MONGO = PyMongo()
@@ -42,3 +44,9 @@ def createDB():
                                  uuidUserString)
         else:
             createCollection(uuidUserString, collName, jsonData)
+
+
+def testDone():
+    newItem = ItemDto("test", 3, "sadasdasd", "sadasdasd")
+
+    addNewItem("asdasd", newItem, "items", MONGO)

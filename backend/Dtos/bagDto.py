@@ -1,51 +1,71 @@
 class BagDto:
-    def __init__(self, name: str, sizeL: int, description: str = ""):
-        self._name = name
-        self._sizeL = sizeL
-        self._description = description
+    def __init__(self,
+                 bagName: str,
+                 capacity: int,
+                 style: str,
+                 notes: str = ""):
+        self._bagName = bagName
+        self._capacity = capacity
+        self._style = style
+        self._notes = notes
 
     @property
-    def name(self):
-        return self._name
+    def bagName(self):
+        return self._bagName
 
-    @name.setter
-    def name(self, newName):
-        if len(newName) > 1 and newName is str:
-            self._name = newName
+    @bagName.setter
+    def bagName(self, newBagName):
+        if len(newBagName) > 1 and newBagName is str:
+            self._bagName = newBagName
         else:
-            raise ValueError(f"{newName} is not a valid name for your bag")
+            raise ValueError(f"{newBagName} is not a valid name for your bag")
 
-    @name.deleter
-    def name(self):
-        del self._name
+    @bagName.deleter
+    def bagName(self):
+        del self._bagName
 
     @property
-    def sizeL(self):
-        return self._sizeL
+    def capacity(self):
+        return self._capacity
 
-    @sizeL.setter
-    def sizeL(self, newSizeL):
-        if newSizeL > 1 and newSizeL is int:
-            self._sizeL = newSizeL
+    @capacity.setter
+    def capacity(self, newCapacity):
+        if newCapacity > 1 and newCapacity is int:
+            self._capacity = newCapacity
         else:
-            raise ValueError(f"{newSizeL} is not a valid size for your bag")
+            raise ValueError(f"{newCapacity} is not a valid size for your bag")
 
-    @sizeL.deleter
-    def sizeL(self):
-        del self._sizeL
+    @capacity.deleter
+    def capacity(self):
+        del self._style
 
     @property
-    def description(self):
-        return self._description
+    def style(self):
+        return self._style
 
-    @description.setter
-    def description(self, newDescription):
-        if len(newDescription) > 1 and newDescription is str:
-            self._description = newDescription
+    @style.setter
+    def style(self, newStyle):
+        if newStyle:
+            self._style = newStyle
         else:
-            raise ValueError((f"{newDescription} is not a valid description "
+            raise ValueError(f"{newStyle} is not a valid style for your bag")
+
+    @style.deleter
+    def style(self):
+        del self._style
+
+    @property
+    def notes(self):
+        return self._notes
+
+    @notes.setter
+    def notes(self, newNotes):
+        if len(newNotes) > 1 and newNotes is str:
+            self._notes = newNotes
+        else:
+            raise ValueError((f"{newNotes} is not a valid notes "
                              "for your bag"))
 
-    @description.deleter
-    def description(self):
-        del self._description
+    @notes.deleter
+    def notes(self):
+        del self._notes

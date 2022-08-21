@@ -1,10 +1,16 @@
 {
     "trip01":{
-    "tripId": "trip1",
-    "destination": "Madrid"
+    "tripName": "trip1",
+    "destination": "Madrid",
+    "date": "2022-05-18",
+    "asignedBags": [],
+    "items": []
     },
     "trip02":{
-    "tripId": "trip2",
-    "destination": "Madrid"
+    "tripName": "trip1",
+    "destination": "London",
+    "date": "2022-06-20",
+    "asignedBags": [],
+    "items": []
     }
 }

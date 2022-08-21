@@ -1,3 +1,4 @@
+from datetime import date as dateFormat
 from bagDto import BagDto
 from itemDto import ItemDto
 from typing import List
@@ -5,30 +6,64 @@ from typing import List
 
 class TripDto:
     def __init__(self,
-                 location: str,
-                 backpacks: List[BagDto],
-                 items: List[ItemDto],
-                 durantion: int):
-        self._location = location
+                 tripName: str,
+                 date: dateFormat,
+                 destination: str,
+                 backpacks: List[str],
+                 items: List[str]):
+        self._location = tripName
+        self._date = date
+        self._destination = destination
         self._backpacks = backpacks
         self._items = items
-        self._durantion = durantion
 
     @property
-    def location(self):
-        return self._location
+    def tripName(self):
+        return self._tripName
 
-    @location.setter
-    def location(self, newLocation: str):
-        if len(newLocation) > 0:
-            self._location = newLocation
+    @tripName.setter
+    def tripName(self, newtripName: str):
+        if len(newtripName) > 0:
+            self._tripName = newtripName
         else:
-            raise ValueError((f"{newLocation} is not a valid location for your"
+            raise ValueError((f"{newtripName} is not a valid name for your"
                              " trip"))
 
-    @location.deleter
-    def location(self):
-        del self._location
+    @tripName.deleter
+    def tripName(self):
+        del self._tripName
+
+    @property
+    def date(self):
+        return self._date
+
+    @date.setter
+    def date(self, newDate: dateFormat):
+        if newDate:
+            self._date = newDate
+        else:
+            raise ValueError((f"{newDate} is not a valid date for your"
+                             " trip"))
+
+    @date.deleter
+    def date(self):
+        del self._date
+
+    @property
+    def destination(self):
+        return self._destination
+
+    @destination.setter
+    def destination(self, newdestination: str):
+        if len(newdestination) > 0:
+            self._destination = newdestination
+        else:
+            raise ValueError((f"{newdestination} is not a valid destination "
+                             "for your trip"))
+
+    @destination.deleter
+    def destination(self):
+        del self._destination
 
     @property
     def backpacks(self):
@@ -58,19 +93,3 @@ class TripDto:
     @items.deleter
     def items(self):
         del self._items
-
-    @property
-    def duration(self):
-        return self._duration
-
-    @duration.setter
-    def duration(self, newDuration: int):
-        if newDuration > 0:
-            self._duration = newDuration
-        else:
-            raise ValueError((f"{newDuration} is not a valid duration for your"
-                             " trip"))
-
-    @duration.deleter
-    def duration(self):
-        del self._duration

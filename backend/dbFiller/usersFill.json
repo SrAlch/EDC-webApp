@@ -1,5 +1,7 @@
 {
-    "userId": "user1",
+    "username": "user1",
     "name": "Daniel",
-    "email": "test@email.com"  
+    "email": "test@email.com",
+    "phone": "0121-052-1225",
+    "homeCountry": "Ireland"
 }

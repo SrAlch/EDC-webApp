@@ -10,6 +10,24 @@ const Header: React.FC = () => {
                 <Link to='/'>
                     <span>Home</span>
                 </Link>
+                <Link to='/profile'>
+                    <span>Profile</span>
+                </Link>
+                <Link to='/trips'>
+                    <span>Trips</span>
+                </Link>
+                <Link to='/bags'>
+                    <span>Bags</span>
+                </Link>
+                <Link to='/items'>
+                    <span>Items</span>
+                </Link>
+                <Link to='/login'>
+                    <span>Login</span>
+                </Link>
+                <Link to='/register'>
+                    <span>Register</span>
+                </Link>
             </Content>
         </Wrapper>
     );

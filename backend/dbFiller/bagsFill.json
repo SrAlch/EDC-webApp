@@ -1,10 +1,12 @@
 {
     "bag01":
-        {"bagId": "bag1",
+        {"bagName": "black miltec",
         "bagSize": 35,
-        "bagName": "Test Bag 01"},
+        "notes": "",
+        "style": ""},
     "bag02":
-        {"bagId": "bag2",
+        {"bagName": "black miltec",
         "bagSize": 35,
-        "bagName": "Test Bag 02"}
+        "notes": "",
+        "style": ""}
 }

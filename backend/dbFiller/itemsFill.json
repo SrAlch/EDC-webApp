@@ -1,14 +1,20 @@
 {
     "item01":{
-    "itemId": "item1",
-    "itemName": "bottle"
+    "itemName": "bottle",
+    "amount": 1,
+    "notes": "",
+    "category": ""
     },
     "item02":{
-    "itemId": "item2",
-    "itemName": "torch"
+    "itemName": "towel",
+    "amount": 1,
+    "notes": "",
+    "category": ""
     },
     "item03":{
-    "itemId": "item3",
-    "itemName": "medkit"
+    "itemName": "battery",
+    "amount": 5,
+    "notes": "",
+    "category": ""
     }
 }

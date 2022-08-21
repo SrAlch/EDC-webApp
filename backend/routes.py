@@ -6,7 +6,8 @@ import dbFunct
 
 appInst = app.webApp()
 
-dbCreation.createDB()
+# dbCreation.createDB()
+dbCreation.testDone()
 
 
 @appInst.route("/")

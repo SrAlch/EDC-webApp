@@ -1,6 +1,6 @@
 from datetime import date as dateFormat
-from bagDto import BagDto
-from itemDto import ItemDto
+from dtos.bagDto import BagDto
+from dtos.itemDto import ItemDto
 from typing import List
 
 

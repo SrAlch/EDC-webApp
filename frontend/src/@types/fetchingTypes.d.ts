@@ -1,17 +1,29 @@
 export type Trip = {
-    tripId: string,
-    destination: string
+    _id: string
+    ownerId: string,
+    tripName: string,
+    date: Date,
+    destination: string,
+    backpacks: string[],
+    items: string[]
 }
 
 export type Bag = {
-    bagId: string,
-    bagSize: number,
-    bagName: string
+    _id: string
+    ownerId: string,
+    bagName: string,
+    capacity: number,
+    style: string,
+    notes: string
 }
 
 export type Item = {
-    itemId: string,
-    itemName: string
+    _id: string,
+    ownerId: string,
+    itemName: string,
+    itemAmount: number,
+    notes: string,
+    category: string
 }
 
 export type User = {

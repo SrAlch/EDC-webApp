@@ -4,68 +4,68 @@ class BagDto:
                  capacity: int,
                  style: str,
                  notes: str = ""):
-        self._bagName = bagName
-        self._capacity = capacity
-        self._style = style
-        self._notes = notes
+        self.bagName = bagName
+        self.capacity = capacity
+        self.style = style
+        self.notes = notes
 
     @property
-    def bagName(self):
-        return self._bagName
+    def bagName_prop(self):
+        return self.bagName
 
-    @bagName.setter
-    def bagName(self, newBagName):
-        if len(newBagName) > 1 and newBagName is str:
-            self._bagName = newBagName
+    @bagName_prop.setter
+    def bagName_prop(self, newBagName: str):
+        if len(newBagName) > 1:
+            self.bagName = newBagName
         else:
             raise ValueError(f"{newBagName} is not a valid name for your bag")
 
-    @bagName.deleter
-    def bagName(self):
-        del self._bagName
+    @bagName_prop.deleter
+    def bagName_prop(self):
+        del self.bagName
 
     @property
-    def capacity(self):
-        return self._capacity
+    def capacity_prop(self):
+        return self.capacity
 
-    @capacity.setter
-    def capacity(self, newCapacity):
-        if newCapacity > 1 and newCapacity is int:
-            self._capacity = newCapacity
+    @capacity_prop.setter
+    def capacity_prop(self, newCapacity: int):
+        if newCapacity > 1:
+            self.capacity = newCapacity
         else:
             raise ValueError(f"{newCapacity} is not a valid size for your bag")
 
-    @capacity.deleter
-    def capacity(self):
-        del self._style
+    @capacity_prop.deleter
+    def capacity_prop(self):
+        del self.style
 
     @property
-    def style(self):
-        return self._style
+    def style_prop(self):
+        return self.style
 
-    @style.setter
-    def style(self, newStyle):
+    @style_prop.setter
+    def style_prop(self, newStyle: str):
         if newStyle:
-            self._style = newStyle
+            self.style = newStyle
         else:
             raise ValueError(f"{newStyle} is not a valid style for your bag")
 
-    @style.deleter
-    def style(self):
-        del self._style
+    @style_prop.deleter
+    def style_prop(self):
+        del self.style
 
     @property
-    def notes(self):
-        return self._notes
+    def notes_prop(self):
+        return self.notes
 
-    @notes.setter
-    def notes(self, newNotes):
-        if len(newNotes) > 1 and newNotes is str:
-            self._notes = newNotes
+    @notes_prop.setter
+    def notes_prop(self, newNotes: str):
+        if len(newNotes) > 1:
+            self.notes = newNotes
         else:
             raise ValueError((f"{newNotes} is not a valid notes "
                              "for your bag"))
 
-    @notes.deleter
-    def notes(self):
-        del self._notes
+    @notes_prop.deleter
+    def notes_prop(self):
+        del self.notes

@@ -22,7 +22,7 @@ def addNewBag():
                      request.json["capacity"],
                      request.json["style"],
                      request.json["notes"])
-    dbFunct.addNewItem(uuidUser, newItem, "bags", MONGO)
+    dbFunct.addNewBag(uuidUser, newItem, "bags", MONGO)
     return (json.dumps({'success': True}),
             200,
             {'ContentType': 'application/json'})

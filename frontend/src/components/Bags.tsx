@@ -1,15 +1,32 @@
 import React from 'react';
 
-import { useBagsFetch } from '../hooks/useBagsFetch';
+import { useBagsFetch } from '../hooks/useBagsGet';
 
-const Home: React.FC = () => {
+const Bags: React.FC = () => {
     const {
-        bag,
-        setBag
+        bags,
+        setBags
     } = useBagsFetch();
     return (
-        <div>{bag.results}{bag._id} {bag.name} {bag.email} {bag.userId}</div>
+        <React.Fragment>
+            {bags.map(bag => (
+                <div key={bag._id}>
+                    <div>
+                        {bag.bagName}
+                    </div>
+                    <div>
+                        {bag.capacity}
+                    </div>
+                    <div>
+                        {bag.style}
+                    </div>
+                    <div>
+                        {bag.notes}
+                    </div>
+                </div>
+            ))}
+        </React.Fragment>
     );
 };
 
-export default Home
+export default Bags

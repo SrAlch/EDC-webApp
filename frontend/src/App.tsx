@@ -15,7 +15,6 @@ import Bags from './components/Bags';
 
 // Context modules
 
-
 // Styles modules
 import {GlobalStyle} from './GlobalStyle';
 

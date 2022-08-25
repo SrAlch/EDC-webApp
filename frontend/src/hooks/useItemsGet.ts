@@ -4,7 +4,7 @@ import {useState, useEffect} from "react";
 import { Item } from "../@types/fetchingTypes";
 
 
-export const useBagsFetch = () => {
+export const useItemsFetch = () => {
     const [items, setItems] = useState([] as Item[])
 
     useEffect(() => {

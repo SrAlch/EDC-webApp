@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { useState } from 'react';
+import { Button, Backdrop } from '@mui/material';
 
 // Hooks module
 import { useBagsFetch } from '../hooks/useBagsGet';
@@ -7,15 +8,26 @@ import { useBagsFetch } from '../hooks/useBagsGet';
 //Components module
 import Grid from './Grid';
 import BagThumb from './Thumb';
+import NewElementForm from './NewElementForm';
 
 const Bags: React.FC = () => {
-    const {
-        bags,
-        setBags
-    } = useBagsFetch();
+    const { bags, setBags} = useBagsFetch();
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+      };
+    const handleToggle = () => {
+        setOpen(!open);
+      };
     return (
         <Grid header='User Bags'>
-            <Button variant='contained'>Hello World</Button>
+            <Button variant='contained' onClick={handleToggle}>Add Bag</Button>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <NewElementForm status={open} onChangedStatus={(newStatus: any) => {setOpen(newStatus)}}/>
+            </Backdrop>
             {bags.map(bag => (
                 <BagThumb
                     key={bag._id}

@@ -26,7 +26,7 @@ const Bags: React.FC = () => {
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
             >
-                <NewElementForm status={open} onChangedStatus={(newStatus: any) => {setOpen(newStatus)}}/>
+                <NewElementForm status={open} onChangedStatus={(newStatus: boolean) => {setOpen(newStatus)}}/>
             </Backdrop>
             {bags.map(bag => (
                 <BagThumb

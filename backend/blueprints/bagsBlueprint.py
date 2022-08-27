@@ -17,7 +17,7 @@ def getBags():
 
 @bagsBlueprint.route('/bags', methods=["POST"])
 def addNewBag():
-    uuidUser = request.json["uuidUser"]
+    uuidUser = request.json["ownerId"]
     newItem = BagDto(request.json["bagName"],
                      request.json["capacity"],
                      request.json["style"],

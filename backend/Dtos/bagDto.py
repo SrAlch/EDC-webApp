@@ -37,7 +37,7 @@ class BagDto:
 
     @capacity_prop.deleter
     def capacity_prop(self):
-        del self.style
+        del self.capacity
 
     @property
     def style_prop(self):

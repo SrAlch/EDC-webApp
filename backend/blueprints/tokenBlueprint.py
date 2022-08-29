@@ -4,7 +4,7 @@ import pytz
 from flask_jwt_extended import (create_access_token, unset_access_cookies,
                                 get_jwt, get_jwt_identity)
 from flask import Blueprint, request, jsonify, Response
-from dbFunct import findUser
+from dbFunct import getUser
 from dbCreation import MONGO, BCRYPT
 
 
@@ -14,8 +14,8 @@ tokenBlueprint = Blueprint('tokenBlueprint', __name__)
 @tokenBlueprint.after_request
 def refreshToken(response: Response):
     try:
-        expirationTime = get_jwt(pytz.utc)["exp"]
-        currentTime = datetime.now()
+        expirationTime = get_jwt()["exp"]
+        currentTime = datetime.now(pytz.utc)
         targetStamp = datetime.timestamp(currentTime + timedelta(minutes=25))
 
         if targetStamp > expirationTime:
@@ -34,7 +34,7 @@ def create_token():
     password = request.json.get("password", None)
     failReturn = "Wrong user or password. Did you input the correct data?"
 
-    user = findUser(email, MONGO)
+    user = getUser(email, MONGO)
 
     if not user:
         return {"msg": failReturn}, 401
@@ -43,7 +43,7 @@ def create_token():
     if not hashCheck:
         return {"msg": failReturn}, 401
 
-    token = {"acces_token": create_access_token(identity=email)}
+    token = {"access_token": create_access_token(identity=email)}
     return token
 
 

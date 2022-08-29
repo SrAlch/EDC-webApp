@@ -1,3 +1,4 @@
+from backend.dtos.userDto import UserDto
 from dtos.itemDto import ItemDto
 from flask_pymongo import PyMongo
 from dtos.bagDto import BagDto
@@ -37,7 +38,11 @@ def getTrips(uuidUser: str, mongo: PyMongo):
     return result
 
 
-def findUser(email: str, mongo: PyMongo):
+def addNewUser(user: UserDto, mongo: PyMongo):
+    mongo.db.users.insert_one(user.__dict__)
+
+
+def getUser(email: str, mongo: PyMongo):
     result = list(mongo.db.users.find({'email': email}))
     if bool(result):
         result = result[0]

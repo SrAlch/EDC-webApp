@@ -37,7 +37,10 @@ def getTrips(uuidUser: str, mongo: PyMongo):
     return result
 
 
-def findUser(user="user1"):
-    # result = MONGO.db.users.find({'userId': user})
-    result = ""
+def findUser(email: str, mongo: PyMongo):
+    result = list(mongo.db.users.find({'email': email}))
+    if bool(result):
+        result = result[0]
+    else:
+        result = False
     return result

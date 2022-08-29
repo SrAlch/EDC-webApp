@@ -59,11 +59,9 @@ cover/
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+# Secret
+
+webApp.ini
 
 # Flask stuff:
 instance/
@@ -202,3 +200,4 @@ coverage
 
 # production
 build
+backend/cryptest.py

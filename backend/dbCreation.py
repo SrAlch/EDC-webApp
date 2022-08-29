@@ -5,9 +5,13 @@ import uuid
 from flask_pymongo import PyMongo
 from dbFunct import addNewItem
 from dtos.itemDto import ItemDto
+from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt
 
 DBFILLER_FOLDER = join(dirname(abspath(__file__)), "dbFiller")
 MONGO = PyMongo()
+BCRYPT = Bcrypt()
+JWT = JWTManager()
 
 
 def createCollection(uuidInput, collName, jsonFile, uuidDependency=None):

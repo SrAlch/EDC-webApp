@@ -4,11 +4,13 @@ from bson import json_util
 from dtos.bagDto import BagDto
 import dbFunct
 from dbCreation import MONGO
+from flask_jwt_extended import jwt_required
 
 bagsBlueprint = Blueprint('bagsBlueprint', __name__)
 
 
 @bagsBlueprint.route('/bags', methods=["GET"])
+@jwt_required()
 def getBags():
     ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d"
     bagsDict = dbFunct.getBags(ownerId, MONGO)
@@ -16,6 +18,7 @@ def getBags():
 
 
 @bagsBlueprint.route('/bags', methods=["POST"])
+@jwt_required()
 def addNewBag():
     uuidUser = request.json["ownerId"]
     newItem = BagDto(request.json["bagName"],
@@ -29,6 +32,7 @@ def addNewBag():
 
 
 @bagsBlueprint.route('/bags', methods=["PUT"])
+@jwt_required()
 def updateBag():
     uuidUser = request.json["uuidUser"]
     newItem = BagDto(request.json["bagName"],

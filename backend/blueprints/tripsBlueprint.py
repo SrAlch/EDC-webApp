@@ -4,11 +4,13 @@ from bson import json_util
 from dtos.tripDto import TripDto
 import dbFunct
 from dbCreation import MONGO
+from flask_jwt_extended import jwt_required
 
 tripsBlueprint = Blueprint('tripsBlueprint', __name__)
 
 
 @tripsBlueprint.route('/trips', methods=["GET"])
+@jwt_required()
 def getBags():
     ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d"
     tripsDict = dbFunct.getBags(ownerId, MONGO)
@@ -16,6 +18,7 @@ def getBags():
 
 
 @tripsBlueprint.route('/trips', methods=["POST"])
+@jwt_required()
 def addNewBag():
     uuidUser = request.json["uuidUser"]
     newTrip = TripDto(request.json["tripName"],

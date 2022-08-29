@@ -1,3 +1,6 @@
+# Data transfer object to map the information from the database and transfer
+# it to React or to request it from React and inject it in mongoDB
+
 class UserDto:
     def __init__(self,
                  _id: str,

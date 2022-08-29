@@ -9,11 +9,16 @@ from blueprints.bagsBlueprint import bagsBlueprint
 from blueprints.tripsBlueprint import tripsBlueprint
 from blueprints.tokenBlueprint import tokenBlueprint
 
+# Loading the configuration of the application
 
 BACKEND_FOLDER = (os.path.dirname(os.path.abspath(__file__)))
 config = configparser.ConfigParser()
 config.read(os.path.join(BACKEND_FOLDER, "webApp.ini"))
 
+
+# Creates the instance of flask, adds the variables for the applications,
+# register the different blueprits and then adds the instances of the other
+# required modules as mongoDB or JWT.
 
 app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = config['TEST']['SECRET_KEY']

@@ -13,6 +13,10 @@ tokenBlueprint = Blueprint('tokenBlueprint', __name__)
 
 @tokenBlueprint.after_request
 def refreshToken(response: Response):
+    """Function attemps to now how much time is left before the token expire
+    to try to renew it. Gets executed with every new request to the server,
+    checking the token of the user"""
+
     try:
         expirationTime = get_jwt()["exp"]
         currentTime = datetime.now(pytz.utc)
@@ -30,6 +34,10 @@ def refreshToken(response: Response):
 
 @tokenBlueprint.route('/token', methods=["POST"])
 def create_token():
+    """Requests the email and password, checks the user exists, then checks
+    that the provided password matchs the hashed password on the database.
+    If everything is correct will generate a token with the users email"""
+
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     failReturn = "Wrong user or password. Did you input the correct data?"
@@ -49,6 +57,7 @@ def create_token():
 
 @tokenBlueprint.route('/logout', methods=["POST"])
 def logout():
+    """Clears the cached JWT token to remove access"""
     response = {"msg": "Successfully logged out"}
     unset_access_cookies(jsonify(response))
     return response

@@ -4,37 +4,43 @@ from flask_pymongo import PyMongo
 from dtos.bagDto import BagDto
 from dtos.tripDto import TripDto
 
+# All the addElement take the ownerID, the Dto, collection of the database and
+# the instance of the database on flask to make the connection and insert the
+# new element
 
-def addNewItem(uuidUser, item: ItemDto, collection, mongo: PyMongo):
-    newItem = {"_id": f"{uuidUser}-{item.itemName}", "ownerId": uuidUser}
+# TODO: Add error handling in case the element already exist in the database
+
+
+def addNewItem(ownerId, item: ItemDto, collection, mongo: PyMongo):
+    newItem = {"_id": f"{ownerId}-{item.itemName}", "ownerId": ownerId}
     newItem.update(item.__dict__)
     mongo.db[collection].insert_one(newItem)
 
 
-def getItems(uuidUser: str, mongo: PyMongo):
-    result = mongo.db.items.find({"ownerId": uuidUser})
+def getItems(ownerId: str, mongo: PyMongo):
+    result = mongo.db.items.find({"ownerId": ownerId})
     return result
 
 
-def addNewBag(uuidUser, bag: BagDto, collection, mongo: PyMongo):
-    newBag = {"_id": f"{uuidUser}-{bag.bagName}", "ownerId": uuidUser}
+def addNewBag(ownerId, bag: BagDto, collection, mongo: PyMongo):
+    newBag = {"_id": f"{ownerId}-{bag.bagName}", "ownerId": ownerId}
     newBag.update(bag.__dict__)
     mongo.db[collection].insert_one(newBag)
 
 
-def getBags(uuidUser: str, mongo: PyMongo):
-    result = mongo.db.bags.find({"ownerId": uuidUser})
+def getBags(ownerId: str, mongo: PyMongo):
+    result = mongo.db.bags.find({"ownerId": ownerId})
     return result
 
 
-def addNewTrip(uuidUser, trip: TripDto, collection, mongo: PyMongo):
-    newTrip = {"_id": f"{uuidUser}-{trip.tripName}", "ownerId": uuidUser}
+def addNewTrip(ownerId, trip: TripDto, collection, mongo: PyMongo):
+    newTrip = {"_id": f"{ownerId}-{trip.tripName}", "ownerId": ownerId}
     newTrip.update(trip.__dict__)
     mongo.db[collection].insert_one(newTrip)
 
 
-def getTrips(uuidUser: str, mongo: PyMongo):
-    result = mongo.db.trips.find({"ownerId": uuidUser})
+def getTrips(ownerId: str, mongo: PyMongo):
+    result = mongo.db.trips.find({"ownerId": ownerId})
     return result
 
 

@@ -14,7 +14,8 @@ export const useBagsFetch = () => {
                 'Content-Type':'application/json'
                 }})
                 .then(response => response.json())            
-                .then(response => setBags(response))            
+                .then(response => setBags(response))
+                .catch(error => console.log(error))            
     }, []);
 
     return {bags, setBags}

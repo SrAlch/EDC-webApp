@@ -1,4 +1,4 @@
-from backend.dtos.userDto import UserDto
+from dtos.userDto import UserDto
 from dtos.itemDto import ItemDto
 from flask_pymongo import PyMongo
 from dtos.bagDto import BagDto

@@ -11,20 +11,23 @@ usersBlueprint = Blueprint('bagsBlueprint', __name__)
 
 @usersBlueprint.route('/register', methods=["POST"])
 def createUser():
-    userId = str(uuid1())
-    BCRYPT.generate_password_hash
-    hashedPw = (BCRYPT.generate_password_hash(request.json["password"])
-                      .decode('utf-8'))
-    newUser = UserDto(userId,
-                      request.json["userName"],
-                      request.json["email"],
-                      hashedPw,
-                      request.json["phone"],
-                      request.json["homeCountry"],)
-    checkUser = getUser(newUser["email"])
-
+    """Requests the information on the registration form to then check if the
+    inputed email already exist or not, then creates the Dto object and send
+    it to the database"""
+    newUserEmail = request.json["email"]
+    checkUser = getUser(newUserEmail, MONGO)
     if not checkUser:
-        addNewUser
+        userId = str(uuid1())
+        hashedPw = (BCRYPT.generate_password_hash(request.json["password"])
+                          .decode('utf-8'))
+        newUser = UserDto(userId,
+                          request.json["userName"],
+                          request.json["email"],
+                          hashedPw,
+                          request.json["phone"],
+                          request.json["homeCountry"],)
+        addNewUser(newUser)
+
     else:
         return {"msg": "This email is already in use"}
 
@@ -32,6 +35,8 @@ def createUser():
 @usersBlueprint.route('/profile', methods=["GET"])
 @jwt_required()
 def getUserProfile():
+    """Requests the current user email and returns all the relevant details of
+    the user"""
     ownerEmail = request.json["email"]
     profileDict = getUser(ownerEmail, MONGO)
     del profileDict["password"]

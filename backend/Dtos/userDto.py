@@ -29,7 +29,7 @@ class UserDto:
         return self.userName
 
     @userName_prop.setter
-    def userName_prop(self, newUserName: int):
+    def userName_prop(self, newUserName: str):
         self.userName = newUserName
 
     @userName_prop.deleter

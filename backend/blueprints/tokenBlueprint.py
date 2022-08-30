@@ -40,6 +40,7 @@ def create_token():
 
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+
     failReturn = "Wrong user or password. Did you input the correct data?"
 
     user = getUser(email, MONGO)
@@ -52,7 +53,7 @@ def create_token():
         return {"msg": failReturn}, 401
 
     token = {"access_token": create_access_token(identity=email)}
-    return token
+    return jsonify(token)
 
 
 @tokenBlueprint.route('/logout', methods=["POST"])

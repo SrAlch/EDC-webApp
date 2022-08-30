@@ -1,12 +1,13 @@
 from uuid import uuid1
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from bson import json_util
 from dtos.userDto import UserDto
 from dbFunct import getUser, addNewUser
 from dbCreation import MONGO, BCRYPT
 from flask_jwt_extended import jwt_required
 
-usersBlueprint = Blueprint('bagsBlueprint', __name__)
+
+usersBlueprint = Blueprint('usersBlueprint', __name__)
 
 
 @usersBlueprint.route('/register', methods=["POST"])
@@ -32,12 +33,12 @@ def createUser():
         return {"msg": "This email is already in use"}
 
 
-@usersBlueprint.route('/profile', methods=["GET"])
+@usersBlueprint.route('/profile/<string:email>', methods=["GET", "OPTIONS"])
 @jwt_required()
-def getUserProfile():
+def getUserProfile(email: str):
     """Requests the current user email and returns all the relevant details of
-    the user"""
-    ownerEmail = request.json["email"]
-    profileDict = getUser(ownerEmail, MONGO)
+    the user."""
+
+    profileDict = getUser(email, MONGO)
     del profileDict["password"]
-    return json_util.dumps(profileDict)
+    return jsonify(profileDict)

@@ -1,13 +1,28 @@
-import React, { ChangeEvent, useContext, useEffect } from "react";
+import React, { ChangeEvent, useContext } from "react";
 
 import {Alert, AlertTitle, Button, Collapse, IconButton, TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from "react";
 
-import { UserData } from "../@types/fetchingTypes";
 import { useNavigate } from "react-router-dom";
 import { UserContextType } from "../@types/context";
 import Context from "../context/context";
+
+
+function setOwnerId(access_token: string, email: string) {
+    fetch(`http://localhost:5000/profile/${email}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }})
+            .then(response => response.json())
+            .then(response => {
+                if (response._id !== undefined) {
+                    localStorage.setItem("ownerId", response._id)
+                }
+            });
+}
 
 
 const Login: React.FC = () => {   
@@ -42,6 +57,9 @@ const Login: React.FC = () => {
                         if (response.access_token !== undefined) {
                             const access_token: string = response.access_token
                             setState({access_token, email})
+                            localStorage.setItem("access_token", access_token)
+                            localStorage.setItem("email", email)
+                            setOwnerId(access_token, email)
                             navigate("/")
                         } else {
                             setErrorMessage(response.msg)

@@ -5,7 +5,7 @@ import { Paper, Button, TextField, Box, TextareaAutosize } from "@mui/material";
 import { Bag } from "../../@types/fetchingTypes";
 import { useBagsFetch } from "../../hooks/useBagsGet";
 
-const currentPath = window.location.pathname.replace('/', '');
+//const currentPath = window.location.pathname.replace('/', '');
 
 type NewFormTypes = {
     status: boolean,
@@ -18,7 +18,9 @@ const NewElementForm: React.FC<NewFormTypes> = (props) => {
     const [style, setStyle] = useState('' as Bag["style"])
     const [notes, setNotes] = useState('' as Bag["notes"])
     const { bags, setBags } = useBagsFetch();
-    const ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d"
+    const ownerId: string = (localStorage.getItem("ownerId") || '')
+    
+ 
     return (<Paper>
         <h2>New Bag</h2>
         <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
@@ -41,20 +43,19 @@ const NewElementForm: React.FC<NewFormTypes> = (props) => {
                 e.preventDefault();
                 const _id = `${ownerId}-${bagName}`
                 const data: Bag = { _id, ownerId, bagName, capacity, style, notes }
-                {
-                    fetch('http://localhost:5000/bags', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    })
-                        .then(response => response.json())
-                        .catch(error => console.log(error))
-                }
+                fetch('http://localhost:5000/bags', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .catch(error => console.log(error))
                 bags.push(data)
                 setBags(bags)
-                window.location.reload();
+                //window.location.reload();
                 props.onChangedStatus(false)
             }}>Submit</Button>
         </Box>

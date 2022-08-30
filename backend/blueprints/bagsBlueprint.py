@@ -9,10 +9,9 @@ from flask_jwt_extended import jwt_required
 bagsBlueprint = Blueprint('bagsBlueprint', __name__)
 
 
-@bagsBlueprint.route('/bags', methods=["GET"])
+@bagsBlueprint.route('/bags/<ownerId>', methods=["GET"])
 @jwt_required()
-def getBags():
-    ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d"
+def getBags(ownerId: str):
     bagsDict = dbFunct.getBags(ownerId, MONGO)
     return json_util.dumps(bagsDict)
 

@@ -7,11 +7,13 @@ from dbFunct import addNewItem
 from dtos.itemDto import ItemDto
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 DBFILLER_FOLDER = join(dirname(abspath(__file__)), "dbFiller")
 MONGO = PyMongo()
 BCRYPT = Bcrypt()
 JWT = JWTManager()
+CORS_INST = CORS()
 
 
 def createCollection(uuidInput, collName, jsonFile, uuidDependency=None):

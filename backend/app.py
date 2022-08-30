@@ -2,11 +2,11 @@ from datetime import timedelta
 import os
 import configparser
 from flask import Flask
-from flask_cors import CORS
-from dbCreation import MONGO, BCRYPT, JWT
+from dbCreation import MONGO, BCRYPT, JWT, CORS_INST
 from blueprints.itemsBlueprint import itemsBlueprint
 from blueprints.bagsBlueprint import bagsBlueprint
 from blueprints.tripsBlueprint import tripsBlueprint
+from blueprints.usersBlueprint import usersBlueprint
 from blueprints.tokenBlueprint import tokenBlueprint
 
 # Loading the configuration of the application
@@ -28,8 +28,9 @@ app.config['MONGO_URI'] = config['TEST']['DB_URI']
 app.register_blueprint(itemsBlueprint)
 app.register_blueprint(bagsBlueprint)
 app.register_blueprint(tripsBlueprint)
+app.register_blueprint(usersBlueprint)
 app.register_blueprint(tokenBlueprint)
 MONGO.init_app(app)
 BCRYPT.init_app(app)
 JWT.init_app(app)
-CORS().init_app(app)
+CORS_INST.init_app(app)

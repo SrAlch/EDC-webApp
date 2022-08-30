@@ -1,16 +1,13 @@
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import { UserContextType } from "../../@types/context";
-import Context from "../../context/context";
 
 import { Wrapper, Content } from "./Header.styles";
 
 const Header: React.FC = () => {
-    const { state } = useContext(Context) as UserContextType;
-    console.log(state)
+    const email = localStorage.getItem("email")
     return (
         <Wrapper>
-                {state && (state.email !== '') ? (
+                {(email !== null) ? (
                     <Content>
                         <Link to='/'>
                             <span>Home</span>

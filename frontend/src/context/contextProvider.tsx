@@ -9,7 +9,7 @@ type ProviderChildren = {
 
 const UserProvider: React.FC<ProviderChildren> = ({ children }) => {
     const [state, setState] = useState<IUser>({
-        token:"",
+        access_token:"",
         email:""
     });
 

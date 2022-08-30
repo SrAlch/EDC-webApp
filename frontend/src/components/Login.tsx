@@ -37,13 +37,14 @@ const Login: React.FC = () => {
                     'Content-Type':'application/json'
                     },
                 body: body})
-                    .then(token => token.json())
-                    .then(token => {
-                        if (token.access_token !== undefined) {
-                            setState({token, email})
+                    .then(response => response.json())
+                    .then(response => {
+                        if (response.access_token !== undefined) {
+                            const access_token: string = response.access_token
+                            setState({access_token, email})
                             navigate("/")
                         } else {
-                            setErrorMessage(token.msg)
+                            setErrorMessage(response.msg)
                             setError(true)
                         }
                     })            

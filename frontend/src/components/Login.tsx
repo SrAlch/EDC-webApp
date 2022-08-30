@@ -35,7 +35,6 @@ const Login: React.FC = () => {
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
         const name = e.currentTarget.name;
-        console.log(name)
         const value = e.currentTarget.value;
         
         if (name === 'email') setEmail(value);
@@ -79,6 +78,7 @@ const Login: React.FC = () => {
                     label="email@example.com"
                     variant="outlined"
                     name="email"
+                    defaultValue="admin@test.com" 
                     onChange={handleInput}/>
 
             <TextField required 
@@ -86,6 +86,7 @@ const Login: React.FC = () => {
                     label="Password"
                     variant="outlined"
                     name="password"
+                    defaultValue="mynameispepito"
                     onChange={handleInput}/>
 
             <Button variant='contained' onClick={handleLogin}>Login</Button>

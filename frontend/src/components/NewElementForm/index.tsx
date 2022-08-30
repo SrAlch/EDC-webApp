@@ -4,6 +4,7 @@ import { Paper, Button, TextField, Box, TextareaAutosize } from "@mui/material";
 
 import { Bag } from "../../@types/fetchingTypes";
 import { useBagsFetch } from "../../hooks/useBagsGet";
+import { useNavigate } from "react-router-dom";
 
 //const currentPath = window.location.pathname.replace('/', '');
 
@@ -19,6 +20,7 @@ const NewElementForm: React.FC<NewFormTypes> = (props) => {
     const [notes, setNotes] = useState('' as Bag["notes"])
     const { bags, setBags } = useBagsFetch();
     const ownerId: string = (localStorage.getItem("ownerId") || '')
+    const navigate = useNavigate();
     
  
     return (<Paper>
@@ -56,6 +58,7 @@ const NewElementForm: React.FC<NewFormTypes> = (props) => {
                 bags.push(data)
                 setBags(bags)
                 //window.location.reload();
+                navigate('/bags')
                 props.onChangedStatus(false)
             }}>Submit</Button>
         </Box>

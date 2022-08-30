@@ -1,6 +1,5 @@
 from uuid import uuid1
 from flask import Blueprint, request, jsonify
-from bson import json_util
 from dtos.userDto import UserDto
 from dbFunct import getUser, addNewUser
 from dbCreation import MONGO, BCRYPT

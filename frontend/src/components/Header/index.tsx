@@ -1,10 +1,12 @@
+import { Button } from "@mui/material";
 import React, {useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Wrapper, Content } from "./Header.styles";
 
 const Header: React.FC = () => {
     const email = localStorage.getItem("email")
+    const navigate = useNavigate();
     return (
         <Wrapper>
                 {(email !== null) ? (
@@ -13,17 +15,26 @@ const Header: React.FC = () => {
                             <span>Home</span>
                         </Link>
                         <Link to='/profile'>
-                        <span>Profile</span>
+                            <span>Profile</span>
                         </Link>
                         <Link to='/trips'>
-                        <span>Trips</span>
+                            <span>Trips</span>
                         </Link>
                         <Link to='/bags'>
-                        <span>Bags</span>
+                            <span>Bags</span>
                         </Link>
                         <Link to='/items'>
-                        <span>Items</span>
+                            <span>Items</span>
                         </Link>
+                        <Button variant='contained' onClick={(e) => {
+                            e.preventDefault()
+                            localStorage.removeItem("email")
+                            localStorage.removeItem("access_token")
+                            localStorage.removeItem("ownerId")
+                            navigate('/')
+                        }}>
+                            Logout
+                        </Button>
                     </Content>
                 ):(
                     <Content>

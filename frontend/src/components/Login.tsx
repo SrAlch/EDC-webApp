@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { UserContextType } from "../@types/context";
-import Context from "../context/context";
 
 
 function setOwnerId(access_token: string, email: string) {
@@ -28,7 +27,6 @@ function setOwnerId(access_token: string, email: string) {
 const Login: React.FC = () => {   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {setState} = useContext(Context) as UserContextType;
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('')
     const [error, setError] = useState(false);
@@ -55,7 +53,6 @@ const Login: React.FC = () => {
                     .then(response => {
                         if (response.access_token !== undefined) {
                             const access_token: string = response.access_token
-                            setState({access_token, email})
                             localStorage.setItem("access_token", access_token)
                             localStorage.setItem("email", email)
                             setOwnerId(access_token, email)

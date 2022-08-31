@@ -9,10 +9,9 @@ from flask_jwt_extended import jwt_required
 itemsBlueprint = Blueprint('itemsBlueprint', __name__)
 
 
-@itemsBlueprint.route('/items', methods=["GET"])
+@itemsBlueprint.route('/items/<ownerId>', methods=["GET"])
 @jwt_required()
-def getItems():
-    ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d"
+def getItems(ownerId: str):
     itemsDict = dbFunct.getItems(ownerId, MONGO)
     return json_util.dumps(itemsDict)
 
@@ -20,7 +19,7 @@ def getItems():
 @itemsBlueprint.route('/items', methods=["POST"])
 @jwt_required()
 def addNewItem():
-    uuidUser = request.json["uuidUser"]
+    uuidUser = request.json["ownerId"]
     newItem = ItemDto(request.json["itemName"],
                       request.json["itemAmount"],
                       request.json["notes"],

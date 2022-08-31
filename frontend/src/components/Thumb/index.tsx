@@ -2,34 +2,38 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 // Styles Module
-import { Wrapper } from "./Thumb.styles";
+import {Divider, List, ListItem, Paper} from "@mui/material";
 
 //Types Module
 import { ItemThumbType, BagThumbType, TripThumbType } from "../../@types/componentsTypes";
 
-const currentPath = window.location.pathname.replace('/', '');
 
-
-const BagThumb: React.FC<BagThumbType> = ({bagName, capacity, notes, style, clickable}) => (
-    <div>
-        {clickable ? (
-            <Wrapper>
-                <div>Clicked</div>
-                <div>{bagName}</div>
-                <div>{capacity}</div>
-                <div>{style}</div>
-                <div>{notes}</div>
-            </Wrapper>
-        ):(
-            <Wrapper>
-                <div>No Clicked</div>
-                <div>{bagName}</div>
-                <div>{capacity}</div>
-                <div>{style}</div>
-                <div>{notes}</div>
-            </Wrapper>
-        )}
-    </div>
+const BagThumb: React.FC<BagThumbType> = ({bagName, capacity, notes, style}) => (
+        <Paper elevation={4} >
+            <List>
+                <ListItem>Bag Name: {bagName}</ListItem>
+                <Divider />
+                <ListItem>Capacity: {capacity}</ListItem>
+                <Divider />
+                <ListItem>Bag Style: {style}</ListItem>
+                <Divider />
+                <ListItem>Notes: {notes}</ListItem>
+            </List>
+        </Paper>
 );
 
-export default BagThumb;
+const ItemThumb: React.FC<ItemThumbType> = ({itemName, itemAmount, notes, category}) => (
+    <Paper elevation={4} >
+        <List>
+            <ListItem>Item Name: {itemName}</ListItem>
+            <Divider />
+            <ListItem>Amount: {itemAmount}</ListItem>
+            <Divider />
+            <ListItem>Category: {category}</ListItem>
+            <Divider />
+            <ListItem>Notes: {notes}</ListItem>
+        </List>
+    </Paper>
+);
+
+export {BagThumb, ItemThumb};

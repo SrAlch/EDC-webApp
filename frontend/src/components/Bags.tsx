@@ -5,20 +5,20 @@ import { Button, Backdrop } from '@mui/material';
 // Hooks module
 import { useBagsFetch } from '../hooks/useBagsGet';
 
-//Components module
+// Components module
 import Grid from './Grid';
-import BagThumb from './Thumb';
-import NewElementForm from './NewElementForm';
+import {BagThumb} from './Thumb';
+import NewBagForm from './NewBagForm';
+
+// Types module 
+import { Bag } from '../@types/fetchingTypes';
 
 const Bags: React.FC = () => {
-    const { bags, setBags} = useBagsFetch();
+    const { bags, setBags } = useBagsFetch();
     const [open, setOpen] = useState(false);
-    const handleClose = () => {
-        setOpen(false);
-      };
     const handleToggle = () => {
         setOpen(!open);
-      };
+    };
     return (
         <Grid header='User Bags'>
             <Button variant='contained' onClick={handleToggle}>Add Bag</Button>
@@ -26,16 +26,19 @@ const Bags: React.FC = () => {
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
             >
-                <NewElementForm status={open} onChangedStatus={(newStatus: boolean) => {setOpen(newStatus)}}/>
+                <NewBagForm
+                    status={open}
+                    onChangedStatus={(newStatus: boolean) => { setOpen(newStatus) }}
+                    bagList={bags}
+                    updatedBagList={(newBag: Bag[]) => { setBags(newBag) }} />
             </Backdrop>
             {bags.map(bag => (
                 <BagThumb
                     key={bag._id}
-                    clickable
                     bagName={bag.bagName}
                     capacity={bag.capacity}
                     style={bag.style}
-                    notes={bag.notes}/>
+                    notes={bag.notes} />
             ))}
         </Grid>
     );

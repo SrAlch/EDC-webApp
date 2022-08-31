@@ -11,7 +11,6 @@ export type ItemThumbType = {
     itemAmount: number,
     notes: string,
     category: string,
-    clickable: boolean
 }
 
 export type BagThumbType = {
@@ -19,7 +18,6 @@ export type BagThumbType = {
     capacity: number,
     style: string,
     notes: string,
-    clickable: boolean
 }
 
 export type TripThumbType = {
@@ -28,5 +26,4 @@ export type TripThumbType = {
     destination: string,
     backpacks: string[],
     items: string[],
-    clickable: boolean
 }

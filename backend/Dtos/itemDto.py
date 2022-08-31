@@ -13,55 +13,55 @@ class ItemDto:
         self.category = category
 
     @property
-    def itemName(self):
+    def itemName_prop(self):
         return self.itemName
 
-    @itemName.setter
-    def itemName(self, newItemName: str):
+    @itemName_prop.setter
+    def itemName_prop(self, newItemName: str):
         if len(newItemName) > 0:
             self.itemName = newItemName
         else:
             raise ValueError(f"{newItemName} is not long enough")
 
-    @itemName.deleter
-    def itemName(self):
+    @itemName_prop.deleter
+    def itemName_prop(self):
         del self.itemAmount
 
     @property
-    def itemAmount(self):
+    def itemAmount_prop(self):
         return self.itemAmount
 
-    @itemAmount.setter
-    def itemAmount(self, newItemAmount: int):
+    @itemAmount_prop.setter
+    def itemAmount_prop(self, newItemAmount: int):
         if newItemAmount > 0:
             self.itemAmount = newItemAmount
         else:
             raise ValueError(f"{newItemAmount} doesn't have enough number")
 
-    @itemAmount.deleter
-    def itemAmount(self):
+    @itemAmount_prop.deleter
+    def itemAmount_prop(self):
         del self.itemAmount
 
     @property
-    def notes(self):
+    def notes_prop(self):
         return self.notes
 
-    @notes.setter
-    def notes(self, newNotes: str):
+    @notes_prop.setter
+    def notes_prop(self, newNotes: str):
         self.notes = newNotes
 
-    @notes.deleter
-    def notes(self):
+    @notes_prop.deleter
+    def notes_prop(self):
         del self.notes
 
     @property
-    def category(self):
+    def category_prop(self):
         return self.category
 
-    @category.setter
-    def category(self, newCategory: str):
+    @category_prop.setter
+    def category_prop(self, newCategory: str):
         self.category = newCategory
 
-    @category.deleter
-    def category(self):
+    @category_prop.deleter
+    def category_prop(self):
         del self.category

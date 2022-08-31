@@ -3,26 +3,23 @@ import React, { useState } from "react";
 import { Paper, Button, TextField, Box, TextareaAutosize } from "@mui/material";
 
 import { Bag } from "../../@types/fetchingTypes";
-import { useBagsFetch } from "../../hooks/useBagsGet";
 import { useNavigate } from "react-router-dom";
-
-//const currentPath = window.location.pathname.replace('/', '');
 
 type NewFormTypes = {
     status: boolean,
-    onChangedStatus: any
+    onChangedStatus: any,
+    bagList: Bag[],
+    updatedBagList: any
 }
 
-const NewElementForm: React.FC<NewFormTypes> = (props) => {
+const NewBagForm: React.FC<NewFormTypes> = (props) => {
     const [bagName, setBagName] = useState('' as Bag["bagName"])
     const [capacity, setCapacity] = useState(0 as Bag["capacity"])
     const [style, setStyle] = useState('' as Bag["style"])
     const [notes, setNotes] = useState('' as Bag["notes"])
-    const { bags, setBags } = useBagsFetch();
     const ownerId: string = (localStorage.getItem("ownerId") || '')
-    const navigate = useNavigate();
-    
- 
+
+
     return (<Paper>
         <h2>New Bag</h2>
         <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
@@ -55,10 +52,8 @@ const NewElementForm: React.FC<NewFormTypes> = (props) => {
                 })
                     .then(response => response.json())
                     .catch(error => console.log(error))
-                bags.push(data)
-                setBags(bags)
-                //window.location.reload();
-                navigate('/bags')
+                props.bagList.push(data)
+                props.updatedBagList(props.bagList)
                 props.onChangedStatus(false)
             }}>Submit</Button>
         </Box>
@@ -66,4 +61,4 @@ const NewElementForm: React.FC<NewFormTypes> = (props) => {
     </Paper>)
 };
 
-export default NewElementForm;
+export default NewBagForm;

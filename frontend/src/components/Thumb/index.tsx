@@ -9,17 +9,17 @@ import { ItemThumbType, BagThumbType, TripThumbType } from "../../@types/compone
 
 
 const BagThumb: React.FC<BagThumbType> = ({bagName, capacity, notes, style}) => (
-        <Paper elevation={4} >
-            <List>
-                <ListItem>Bag Name: {bagName}</ListItem>
-                <Divider />
-                <ListItem>Capacity: {capacity}</ListItem>
-                <Divider />
-                <ListItem>Bag Style: {style}</ListItem>
-                <Divider />
-                <ListItem>Notes: {notes}</ListItem>
-            </List>
-        </Paper>
+    <Paper elevation={4} >
+        <List>
+            <ListItem>Bag Name: {bagName}</ListItem>
+            <Divider />
+            <ListItem>Capacity: {capacity}</ListItem>
+            <Divider />
+            <ListItem>Bag Style: {style}</ListItem>
+            <Divider />
+            <ListItem>Notes: {notes}</ListItem>
+        </List>
+    </Paper>
 );
 
 const ItemThumb: React.FC<ItemThumbType> = ({itemName, itemAmount, notes, category}) => (

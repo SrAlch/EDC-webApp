@@ -27,10 +27,11 @@ export type Item = {
 }
 
 export type User = {
-    _id: string,
-    userId: string,
-    name: string,
-    email: string
+    userName: string,
+    email: string,
+    password: string,
+    phone: string,
+    homeCountry: string
 }
 
 export type UserData = {

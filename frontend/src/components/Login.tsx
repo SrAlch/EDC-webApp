@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useContext } from "react";
 
-import {Alert, AlertTitle, Button, Collapse, IconButton, TextField} from "@mui/material";
+import {Alert, AlertTitle, Box, Button, Collapse, Container, IconButton, Stack, TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from "react";
 
@@ -69,34 +69,40 @@ const Login: React.FC = () => {
     }
 
     return(
-        <div>
-            <TextField required 
-                    id="outlined-basic"
-                    label="email@example.com"
-                    variant="outlined"
-                    name="email"
-                    defaultValue="admin@test.com" 
-                    onChange={handleInput}/>
+        <Container maxWidth="sm">
+            <Box sx={{ bgcolor: '#494949', height: 'auto', marginTop: '20px', borderRadius: '10px', padding: "20px" }} >
+                <Stack spacing={2}>
+                    <TextField required 
+                            id="outlined-basic"
+                            label="email@example.com"
+                            variant="outlined"
+                            name="email"
+                            defaultValue="admin@test.com"
+                            sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}}
+                            onChange={handleInput}/>
 
-            <TextField required 
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                    name="password"
-                    defaultValue="mynameispepito"
-                    onChange={handleInput}/>
+                    <TextField required 
+                            id="outlined-basic"
+                            label="Password"
+                            variant="outlined"
+                            name="password"
+                            defaultValue="mynameispepito"
+                            sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}}
+                            onChange={handleInput}/>
 
-            <Button variant='contained' onClick={handleLogin}>Login</Button>
-            <Collapse in={error}>
-                <Alert severity="error" action={
-                        <IconButton aria-label="close" color="inherit" size="small" onClick={() => {setError(false);}}>
-                            <CloseIcon fontSize="inherit" />
-                        </IconButton>}>
-                    <AlertTitle>Error</AlertTitle>
-                    {errorMessage}
-                </Alert>
-            </Collapse>
-        </div>
+                    <Button variant='contained' onClick={handleLogin}>Login</Button>
+                    <Collapse in={error}>
+                        <Alert severity="error" action={
+                                <IconButton aria-label="close" color="inherit" size="small" onClick={() => {setError(false);}}>
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>}>
+                            <AlertTitle>Error</AlertTitle>
+                            {errorMessage}
+                        </Alert>
+                    </Collapse>
+                </Stack>
+            </Box>
+        </Container>
     
     )
 }

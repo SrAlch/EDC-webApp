@@ -10,7 +10,7 @@ export const useItemsFetch = () => {
     const accessToken = localStorage.getItem("access_token")
 
     useEffect(() => {
-            fetch('http://localhost:5000/items/${ownerId}', {
+            fetch(`http://localhost:5000/items/${ownerId}`, {
             method :'GET',
             headers : {
                 'Content-Type':'application/json',

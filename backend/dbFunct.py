@@ -33,6 +33,11 @@ def getBags(ownerId: str, mongo: PyMongo):
     return result
 
 
+def deleteBag(bagId: str, mongo: PyMongo):
+    result = mongo.db.bags.delete_one({"_id": bagId})
+    return result
+
+
 def addNewTrip(ownerId, trip: TripDto, collection, mongo: PyMongo):
     newTrip = {"_id": f"{ownerId}-{trip.tripName}", "ownerId": ownerId}
     newTrip.update(trip.__dict__)

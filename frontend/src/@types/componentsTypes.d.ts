@@ -18,6 +18,8 @@ export type BagThumbType = {
     capacity: number,
     style: string,
     notes: string,
+    bagList: Bag[],
+    updatedBagList: any
 }
 
 export type TripThumbType = {

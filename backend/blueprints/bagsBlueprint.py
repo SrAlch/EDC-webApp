@@ -33,12 +33,16 @@ def addNewBag():
 @bagsBlueprint.route('/bags', methods=["PUT"])
 @jwt_required()
 def updateBag():
-    uuidUser = request.json["uuidUser"]
-    newItem = BagDto(request.json["bagName"],
-                     request.json["capacity"],
-                     request.json["style"],
-                     request.json["notes"])
-    dbFunct.addNewItem(uuidUser, newItem, "bags", MONGO)
-    return (json.dumps({'success': True}),
-            200,
-            {'ContentType': 'application/json'})
+    return "mising"
+
+
+@bagsBlueprint.route('/bags', methods=["DELETE"])
+@jwt_required()
+def deleteBag():
+    bagId = request.json["bagId"]
+    result = dbFunct.deleteBag(bagId, MONGO)
+    if result.deleted_count == 1:
+        return {"msg": "Record deleted"}, 200
+    else:
+        return {"msg": "An error has occured"}, 400
+

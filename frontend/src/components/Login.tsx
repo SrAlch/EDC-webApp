@@ -76,7 +76,6 @@ const Login: React.FC = () => {
                             label="email@example.com"
                             variant="outlined"
                             name="email"
-                            defaultValue="admin@test.com"
                             sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}}
                             onChange={handleInput}/>
 
@@ -85,8 +84,7 @@ const Login: React.FC = () => {
                             label="Password"
                             variant="outlined"
                             name="password"
-                            //type="password"
-                            defaultValue="mynameispepito"
+                            type="password"
                             sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}}
                             onChange={handleInput}/>
 

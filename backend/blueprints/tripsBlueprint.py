@@ -29,3 +29,14 @@ def addNewBag():
     return (json.dumps({'success': True}),
             200,
             {'ContentType': 'application/json'})
+
+
+@tripsBlueprint.route('/trips', methods=["DELETE"])
+@jwt_required()
+def deleteItem():
+    tripId = request.json["tripId"]
+    result = dbFunct.deleteTrip(tripId, MONGO)
+    if result.deleted_count == 1:
+        return {"msg": "Record deleted"}, 200
+    else:
+        return {"msg": "An error has occured"}, 400

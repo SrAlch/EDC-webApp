@@ -28,3 +28,14 @@ def addNewItem():
     return (json.dumps({'success': True}),
             200,
             {'ContentType': 'application/json'})
+
+
+@itemsBlueprint.route('/items', methods=["DELETE"])
+@jwt_required()
+def deleteItem():
+    itemId = request.json["itemId"]
+    result = dbFunct.deleteItem(itemId, MONGO)
+    if result.deleted_count == 1:
+        return {"msg": "Record deleted"}, 200
+    else:
+        return {"msg": "An error has occured"}, 400

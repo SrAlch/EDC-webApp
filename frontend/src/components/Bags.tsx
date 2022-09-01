@@ -19,9 +19,11 @@ const Bags: React.FC = () => {
     const handleToggle = () => {
         setOpen(!open);
     };
+
+ // TODO: https://stackoverflow.com/questions/59511201/too-many-re-renders-react-limits-the-number-of-renders-to-prevent-an-infinite-l
     return (
         <Grid header='User Bags'>
-            <Button variant='contained' onClick={handleToggle}>Add Bag</Button>
+            <Button variant='contained' onClick={() => handleToggle()}>Add Bag</Button>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}

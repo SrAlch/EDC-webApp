@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 // Types
 import { UserGet } from "../@types/fetchingTypes";
+import { RefreshSession } from "../helpers";
+
 
 
 export const useUserGet = () => {
-    const [user, setUser] = useState({} as UserGet)
-    const email = localStorage.getItem("email")
-    const accessToken = localStorage.getItem("access_token")
+    const [user, setUser] = useState({} as UserGet);
+    const email = localStorage.getItem("email");
+    const accessToken = localStorage.getItem("access_token");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,19 +21,7 @@ export const useUserGet = () => {
                 'Authorization': 'Bearer ' + accessToken
                 }})
                 .then(response => {
-                    if(response.status === 401){
-                        try {
-                            localStorage.removeItem("ownerId")
-                            localStorage.removeItem("email")
-                            localStorage.removeItem("access_token")
-                            console.log("Session expired")
-                            navigate("/")
-                        } catch (error) {
-                            console.log(error)
-                        }
-                    }else{
-                        return response.json()
-                    }
+                    return RefreshSession(response, navigate)
                 })            
                 .then(response => setUser(response))
                 .catch(error => console.log(error))            

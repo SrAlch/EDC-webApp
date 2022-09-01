@@ -4,6 +4,7 @@ import { Paper, Button, TextField, Box, TextareaAutosize } from "@mui/material";
 
 import { Item } from "../../@types/fetchingTypes";
 import { useNavigate } from "react-router-dom";
+import { RefreshSession } from "../../helpers";
 
 type NewFormTypes = {
     status: boolean,
@@ -53,19 +54,7 @@ const NewItemForm: React.FC<NewFormTypes> = (props) => {
                     body: JSON.stringify(data)
                 })
                 .then(response => {
-                    if(response.status === 401){
-                        try {
-                            localStorage.removeItem("ownerId")
-                            localStorage.removeItem("email")
-                            localStorage.removeItem("access_token")
-                            console.log("Session expired")
-                            navigate("/")
-                        } catch (error) {
-                            console.log(error)
-                        }
-                    }else{
-                        return response.json()
-                    }
+                    return RefreshSession(response, navigate)
                 })
                     .catch(error => console.log(error))
                 props.itemList.push(data)

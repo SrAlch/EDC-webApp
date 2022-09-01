@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 // Types
 import { Item } from "../@types/fetchingTypes";
+import { RefreshSession } from "../helpers";
 
 
 export const useItemsFetch = () => {
@@ -19,19 +20,7 @@ export const useItemsFetch = () => {
                 'Authorization': 'Bearer ' + accessToken
                 }})
                 .then(response => {
-                    if(response.status === 401){
-                        try {
-                            localStorage.removeItem("ownerId")
-                            localStorage.removeItem("email")
-                            localStorage.removeItem("access_token")
-                            console.log("Session expired")
-                            navigate("/")
-                        } catch (error) {
-                            console.log(error)
-                        }
-                    }else{
-                        return response.json()
-                    }
+                    return RefreshSession(response, navigate)
                 })            
                 .then(response => setItems(response))
                 .catch(error => console.log(error))             

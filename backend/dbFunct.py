@@ -22,6 +22,11 @@ def getItems(ownerId: str, mongo: PyMongo):
     return result
 
 
+def deleteItem(itemId: str, mongo: PyMongo):
+    result = mongo.db.items.delete_one({"_id": itemId})
+    return result
+
+
 def addNewBag(ownerId, bag: BagDto, collection, mongo: PyMongo):
     newBag = {"_id": f"{ownerId}-{bag.bagName}", "ownerId": ownerId}
     newBag.update(bag.__dict__)
@@ -46,6 +51,11 @@ def addNewTrip(ownerId, trip: TripDto, collection, mongo: PyMongo):
 
 def getTrips(ownerId: str, mongo: PyMongo):
     result = mongo.db.trips.find({"ownerId": ownerId})
+    return result
+
+
+def deleteTrip(tripId: str, mongo: PyMongo):
+    result = mongo.db.trips.delete_one({"_id": tripId})
     return result
 
 

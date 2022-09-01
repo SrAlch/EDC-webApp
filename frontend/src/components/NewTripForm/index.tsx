@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 import { Paper, Button, TextField, Box, Autocomplete, Stack } from "@mui/material";
 
-import { Trip, Bag, Item } from "../../@types/fetchingTypes";
+import { Trip } from "../../@types/fetchingTypes";
 import { useBagsFetch } from "../../hooks/useBagsGet";
 import { useItemsFetch } from "../../hooks/useItemsGet";
 import { useNavigate } from "react-router-dom";
+import { RefreshSession } from "../../helpers";
 
 
 type NewFormTypes = {
@@ -25,7 +26,6 @@ const NewBagForm: React.FC<NewFormTypes> = (props) => {
     const {bags, setBags} = useBagsFetch()
     const {items, setItems} = useItemsFetch()
     const navigate = useNavigate();
-  
 
     return (<Paper>
         <h2>New Trip</h2>
@@ -89,19 +89,7 @@ const NewBagForm: React.FC<NewFormTypes> = (props) => {
                     body: JSON.stringify(data)
                 })
                 .then(response => {
-                    if(response.status === 401){
-                        try {
-                            localStorage.removeItem("ownerId")
-                            localStorage.removeItem("email")
-                            localStorage.removeItem("access_token")
-                            console.log("Session expired")
-                            navigate("/")
-                        } catch (error) {
-                            console.log(error)
-                        }
-                    }else{
-                        return response.json()
-                    }
+                    return RefreshSession(response, navigate)
                 })
                     .catch(error => console.log(error))
                 props.tripList.push(data)

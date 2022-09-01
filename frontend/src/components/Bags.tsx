@@ -20,7 +20,6 @@ const Bags: React.FC = () => {
         setOpen(!open);
     };
 
- // TODO: https://stackoverflow.com/questions/59511201/too-many-re-renders-react-limits-the-number-of-renders-to-prevent-an-infinite-l
     return (
         <Grid header='User Bags'>
             <Button variant='contained' onClick={() => handleToggle()}>Add Bag</Button>
@@ -32,7 +31,8 @@ const Bags: React.FC = () => {
                     status={open}
                     onChangedStatus={(newStatus: boolean) => { setOpen(newStatus) }}
                     bagList={bags}
-                    updatedBagList={(newBag: Bag[]) => { setBags(newBag) }} />
+                    updatedBagList={(newBag: Bag[]) => { setBags(newBag) }}
+                />
             </Backdrop>
             {bags.map(bag => (
                 <BagThumb
@@ -42,7 +42,8 @@ const Bags: React.FC = () => {
                     style={bag.style}
                     notes={bag.notes}
                     bagList={bags}
-                    updatedBagList={(newBag: Bag[]) => { setBags(newBag) }} />
+                    updatedBagList={(newBag: Bag[]) => { setBags(newBag) }}
+                />
             ))}
         </Grid>
     );

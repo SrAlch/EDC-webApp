@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // Styles Module
 import { Chip, Divider, IconButton, List, ListItem, Paper, Stack} from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 //Types Module
@@ -11,15 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { DeleteElement } from "../../helpers";
 
 
-
-function updateBag()
-{
-
-}
-
 const BagThumb: React.FC<BagThumbType> = (props) => {
     const navigate = useNavigate();
-
     const handleRemoveItem = (event: any) => {
         const name = event.currentTarget.getAttribute("name")
          props.updatedBagList(props.bagList.filter(bag => bag.bagName !== name));

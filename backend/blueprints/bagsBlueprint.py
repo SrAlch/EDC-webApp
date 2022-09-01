@@ -35,7 +35,7 @@ def getBags(ownerId: str):
 def deleteBag():
     bagId = request.json["bagId"]
     result = dbFunct.deleteBag(bagId, MONGO)
-    if result.deleted_count == 1:
+    if result == 1:
         return {"msg": "Record deleted"}, 200
     else:
         return {"msg": "An error has occured"}, 400

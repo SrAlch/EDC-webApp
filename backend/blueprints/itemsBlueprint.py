@@ -35,7 +35,7 @@ def addNewItem():
 def deleteItem():
     itemId = request.json["itemId"]
     result = dbFunct.deleteItem(itemId, MONGO)
-    if result.deleted_count == 1:
+    if result == 1:
         return {"msg": "Record deleted"}, 200
     else:
         return {"msg": "An error has occured"}, 400

@@ -36,7 +36,7 @@ def addNewBag():
 def deleteItem():
     tripId = request.json["tripId"]
     result = dbFunct.deleteTrip(tripId, MONGO)
-    if result.deleted_count == 1:
+    if result == 1:
         return {"msg": "Record deleted"}, 200
     else:
         return {"msg": "An error has occured"}, 400

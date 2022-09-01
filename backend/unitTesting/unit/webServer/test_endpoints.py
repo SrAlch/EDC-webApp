@@ -26,4 +26,3 @@ def test_bagGet_endpoint_auth(client_instance_auth: testing.FlaskClient):
     ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d-44"
     response = client_instance_auth.get(f"/bags/{ownerId}")
     assert response.status_code == 200
-

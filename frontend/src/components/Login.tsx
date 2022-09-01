@@ -72,7 +72,7 @@ const Login: React.FC = () => {
             <Box sx={{ bgcolor: '#494949', height: 'auto', marginTop: '20px', borderRadius: '10px', padding: "20px" }} >
                 <Stack spacing={2}>
                     <TextField required 
-                            id="outlined-basic"
+                            id="email-login"
                             label="email@example.com"
                             variant="outlined"
                             name="email"
@@ -81,10 +81,11 @@ const Login: React.FC = () => {
                             onChange={handleInput}/>
 
                     <TextField required 
-                            id="outlined-basic"
+                            id="password-login"
                             label="Password"
                             variant="outlined"
                             name="password"
+                            //type="password"
                             defaultValue="mynameispepito"
                             sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}}
                             onChange={handleInput}/>

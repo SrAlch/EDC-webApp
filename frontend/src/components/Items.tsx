@@ -38,7 +38,9 @@ const Items: React.FC = () => {
                     itemName={item.itemName}
                     itemAmount={item.itemAmount}
                     category={item.category}
-                    notes={item.notes}/>
+                    notes={item.notes}
+                    itemList={items}
+                    updatedItemList={(newBag: Item[]) => { setItems(newBag) }}/>
             ))}
         </Grid>
     );

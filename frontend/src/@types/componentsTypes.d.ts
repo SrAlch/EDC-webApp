@@ -12,6 +12,8 @@ export type ItemThumbType = {
     itemAmount: number,
     notes: string,
     category: string,
+    itemList: Item[],
+    updatedItemList: Dispatch<SetStateAction<Item[]>>
 }
 
 export type BagThumbType = {
@@ -20,7 +22,7 @@ export type BagThumbType = {
     style: string,
     notes: string,
     bagList: Bag[],
-    updatedBagList: any
+    updatedBagList: Dispatch<SetStateAction<Bag[]>>
 }
 
 export type TripThumbType = {
@@ -29,6 +31,6 @@ export type TripThumbType = {
     destination: string,
     backpacks: string[],
     items: string[],
-    tripList: Trip,
-    updatedTripList: any
+    tripList: Trip[],
+    updatedTripList: Dispatch<SetStateAction<Trip[]>>
 }

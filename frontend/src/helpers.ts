@@ -26,14 +26,12 @@ function DeleteElement(elemName: string, navigate: NavigateFunction, elemType: s
             bagId: string,
             itemId: string,
             tripId: string,
-
         }
         
         const ownerId = localStorage.getItem("ownerId")
         const accessToken = localStorage.getItem("access_token")
         const elemId = `${ownerId}-${elemName}`
-        let nameId = ''
-        let elementBody: dict= {} as dict
+        let elementBody = {} as dict
         switch(elemType) {
             case "bags":
                 elementBody.bagId = elemId
@@ -45,7 +43,6 @@ function DeleteElement(elemName: string, navigate: NavigateFunction, elemType: s
                 elementBody.tripId = elemId
               break;
         }
-        console.log(elementBody)
         fetch(`http://localhost:5000/${elemType}`, {
                                 method: 'DELETE',
                                 headers: {

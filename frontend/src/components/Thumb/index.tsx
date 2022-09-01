@@ -18,89 +18,96 @@ function updateBag()
 }
 
 const BagThumb: React.FC<BagThumbType> = (props) => {
-    const [newBagName, setNewBagName] = useState(props.bagName)
-    const [newCapacity, setNewCapacity] = useState(props.capacity)
-    const [newNotes, setNewNotes] = useState(props.notes)
-    const [newStyle, setNewStyle] = useState(props.style)
     const navigate = useNavigate();
+
+    const handleRemoveItem = (event: any) => {
+        const name = event.currentTarget.getAttribute("name")
+         props.updatedBagList(props.bagList.filter(bag => bag.bagName !== name));
+       };
 
     
     return(<Paper elevation={4} >
                 <List>
                     <Stack direction="row" alignItems="right" justifyContent="right">
-                        <IconButton aria-label="close" color="inherit" size="medium" onClick={(e) => {
-                                e.preventDefault();
-                                DeleteElement(newBagName, navigate, "bags")
-                                window.location.reload()
+                        <IconButton name={props.bagName} aria-label="close" color="inherit" size="medium" onClick={(e) => {
+                                handleRemoveItem(e)
+                                DeleteElement(props.bagName, navigate, "bags")
                             }}>
                             
                             <DeleteForeverIcon fontSize="inherit" />
                         </IconButton>
                     </Stack>
-                    <ListItem>Bag Name: {newBagName}</ListItem>
+                    <ListItem>Bag Name: {props.bagName}</ListItem>
                     <Divider />
-                    <ListItem>Capacity: {newCapacity}</ListItem>
+                    <ListItem>Capacity: {props.capacity}</ListItem>
                     <Divider />
-                    <ListItem>Bag Style: {newNotes}</ListItem>
+                    <ListItem>Bag Style: {props.notes}</ListItem>
                     <Divider />
-                    <ListItem>Notes: {newStyle}</ListItem>
+                    <ListItem>Notes: {props.style}</ListItem>
                 </List>
             </Paper>)
         };
 
-const ItemThumb: React.FC<ItemThumbType> = ({itemName, itemAmount, notes, category}) => {
+const ItemThumb: React.FC<ItemThumbType> = (props) => {
     const navigate = useNavigate();
+    const handleRemoveItem = (event: any) => {
+        const name = event.currentTarget.getAttribute("name")
+         props.updatedItemList(props.itemList.filter(item => item.itemName !== name));
+       };
+
     return(
     <Paper elevation={4} >
         <List>
             <Stack direction="row" alignItems="right" justifyContent="right">
-                <IconButton aria-label="close" color="inherit" size="medium" onClick={(e) => {
-                        e.preventDefault();
-                        DeleteElement(itemName, navigate, "items")
-                        window.location.reload()
+                <IconButton name={props.itemName} aria-label="close" color="inherit" size="medium" onClick={(e) => {
+                        handleRemoveItem(e)
+                        DeleteElement(props.itemName, navigate, "items")
                     }}>
                     
                     <DeleteForeverIcon fontSize="inherit" />
                 </IconButton>
             </Stack>
-            <ListItem>Item Name: {itemName}</ListItem>
+            <ListItem>Item Name: {props.itemName}</ListItem>
             <Divider />
-            <ListItem>Amount: {itemAmount}</ListItem>
+            <ListItem>Amount: {props.itemAmount}</ListItem>
             <Divider />
-            <ListItem>Category: {category}</ListItem>
+            <ListItem>Category: {props.category}</ListItem>
             <Divider />
-            <ListItem>Notes: {notes}</ListItem>
+            <ListItem>Notes: {props.notes}</ListItem>
         </List>
     </Paper>
     );
 };
 
-const TripThumb: React.FC<TripThumbType> = ({tripName, date, destination, backpacks, items}) => {
+const TripThumb: React.FC<TripThumbType> = (props) => {
     const navigate = useNavigate();
+    const handleRemoveItem = (event: any) => {
+        const name = event.currentTarget.getAttribute("name")
+         props.updatedTripList(props.tripList.filter(trip => trip.tripName !== name));
+       };
     return(
     <Paper elevation={4} >
         <List>
             <Stack direction="row" alignItems="right" justifyContent="right">
                 <IconButton aria-label="close" color="inherit" size="medium" onClick={(e) => {
-                        e.preventDefault();
-                        DeleteElement(tripName, navigate, "trips")
-                        window.location.reload()
+                        handleRemoveItem(e)
+                        DeleteElement(props.tripName, navigate, "trips")
                     }}>
                     
                     <DeleteForeverIcon fontSize="inherit" />
                 </IconButton>
             </Stack>
-            <ListItem>Trip Name: {tripName}</ListItem>
+            <ListItem>Trip Name: {props.tripName}</ListItem>
             <Divider />
-            <ListItem>Amount: {date}</ListItem>
+            <ListItem>Amount: {props.date}</ListItem>
             <Divider />
-            <ListItem>Category: {destination}</ListItem>
+            <ListItem>Category: {props.destination}</ListItem>
             <Divider />
-            <ListItem>Backpacks: {backpacks.map(backpack => (
+            <ListItem>Backpacks: {props.backpacks.map(backpack => (
                 <Chip sx={{backgroundColor: "#6ca5eff4"}} label={backpack} />
             ))}</ListItem>
             <Divider />
-            <ListItem>Items: {items.map(item => (
+            <ListItem>Items: {props.items.map(item => (
                 <Chip sx={{backgroundColor: "#6ca5eff4"}} label={item} />
             ))}</ListItem>
         </List>

@@ -17,11 +17,11 @@ const Register: React.FC = () => {
         <Container maxWidth="sm">
             <Box sx={{ bgcolor: '#494949', height: 'auto', marginTop: '20px', borderRadius: '10px', padding: "20px" }} >
                 <Stack spacing={2}>
-                    <TextField required sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="outlined-basic" label="Username" variant="outlined" onChange={(e) => setUserName(e.currentTarget.value)}/>
-                    <TextField required sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.currentTarget.value)}/>
-                    <TextField required sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="outlined-basic" label="Password" variant="outlined" onChange={(e) => setPassword(e.currentTarget.value)}/>
-                    <TextField sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="outlined-basic" label="Phone" variant="outlined" onChange={(e) => setPhone(e.currentTarget.value)}/>
-                    <TextField sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="outlined-basic" label="Home Country" variant="outlined" onChange={(e) => setHomeCountry(e.currentTarget.value)}/>
+                    <TextField required sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="username-register" label="Username" variant="outlined" onChange={(e) => setUserName(e.currentTarget.value)}/>
+                    <TextField required sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="email-register" label="Email" variant="outlined" onChange={(e) => setEmail(e.currentTarget.value)}/>
+                    <TextField required sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="password-register" label="Password" type="password" variant="outlined" onChange={(e) => setPassword(e.currentTarget.value)}/>
+                    <TextField sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="phone-register" label="Phone" variant="outlined" onChange={(e) => setPhone(e.currentTarget.value)}/>
+                    <TextField sx={{ bgcolor: '#e9e9e9', borderRadius: '10px'}} id="home-register" label="Home Country" variant="outlined" onChange={(e) => setHomeCountry(e.currentTarget.value)}/>
                     <span>(*) Mandatory fields</span>
                     <Button variant='contained' onClick={(e) => {
                         e.preventDefault();

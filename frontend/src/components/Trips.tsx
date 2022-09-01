@@ -34,7 +34,7 @@ const Trips: React.FC = () => {
                     destination={trip.destination}
                     backpacks={trip.backpacks.map(({bagName}) => bagName)}
                     items={trip.items.map(({itemName}) => itemName)}
-                    tripList={trip}
+                    tripList={trips}
                     updatedTripList={(newTrip: Trip[]) => { setTrips(newTrip) }} />
             ))}
         </Grid>

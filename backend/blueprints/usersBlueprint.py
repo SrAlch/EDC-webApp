@@ -2,7 +2,7 @@ import re
 from uuid import uuid1
 from flask import Blueprint, request, jsonify
 from dtos.userDto import UserDto
-from dbFunct import getUser, addNewUser
+from dbFunct import getUser, addNewUser, deleteUser
 from dbCreation import MONGO, BCRYPT
 from flask_jwt_extended import jwt_required
 
@@ -48,7 +48,7 @@ def createUser():
         return {"msg": "This email is already in use"}, 400
 
 
-@usersBlueprint.route('/profile/<string:email>', methods=["GET", "OPTIONS"])
+@usersBlueprint.route('/profile/<string:email>', methods=["GET"])
 @jwt_required()
 def getUserProfile(email: str):
     """Requests the current user email and returns all the relevant details of
@@ -57,3 +57,11 @@ def getUserProfile(email: str):
     profileDict = getUser(email, MONGO)
     del profileDict["password"]
     return jsonify(profileDict)
+
+
+@usersBlueprint.route('/profile/<string:ownerId>', methods=["DELETE"])
+@jwt_required()
+def deleteUserProfile(ownerId: str):
+    """"""
+    result = deleteUser(ownerId, MONGO)
+    return jsonify(result)

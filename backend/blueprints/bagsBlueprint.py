@@ -9,13 +9,6 @@ from flask_jwt_extended import jwt_required
 bagsBlueprint = Blueprint('bagsBlueprint', __name__)
 
 
-@bagsBlueprint.route('/bags/<ownerId>', methods=["GET"])
-@jwt_required()
-def getBags(ownerId: str):
-    bagsDict = dbFunct.getBags(ownerId, MONGO)
-    return json_util.dumps(bagsDict)
-
-
 @bagsBlueprint.route('/bags', methods=["POST"])
 @jwt_required()
 def addNewBag():
@@ -30,10 +23,11 @@ def addNewBag():
             {'ContentType': 'application/json'})
 
 
-@bagsBlueprint.route('/bags', methods=["PUT"])
+@bagsBlueprint.route('/bags/<ownerId>', methods=["GET"])
 @jwt_required()
-def updateBag():
-    return "mising"
+def getBags(ownerId: str):
+    bagsDict = dbFunct.getBags(ownerId, MONGO)
+    return json_util.dumps(bagsDict)
 
 
 @bagsBlueprint.route('/bags', methods=["DELETE"])

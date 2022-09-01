@@ -14,7 +14,8 @@ from dtos.tripDto import TripDto
 def addNewItem(ownerId, item: ItemDto, collection, mongo: PyMongo):
     newItem = {"_id": f"{ownerId}-{item.itemName}", "ownerId": ownerId}
     newItem.update(item.__dict__)
-    mongo.db[collection].insert_one(newItem)
+    result = mongo.db[collection].insert_one(newItem)
+    return result.acknowledged
 
 
 def getItems(ownerId: str, mongo: PyMongo):
@@ -24,13 +25,14 @@ def getItems(ownerId: str, mongo: PyMongo):
 
 def deleteItem(itemId: str, mongo: PyMongo):
     result = mongo.db.items.delete_one({"_id": itemId})
-    return result
+    return result.deleted_count
 
 
 def addNewBag(ownerId, bag: BagDto, collection, mongo: PyMongo):
     newBag = {"_id": f"{ownerId}-{bag.bagName}", "ownerId": ownerId}
     newBag.update(bag.__dict__)
-    mongo.db[collection].insert_one(newBag)
+    result = mongo.db[collection].insert_one(newBag)
+    return result.acknowledged
 
 
 def getBags(ownerId: str, mongo: PyMongo):
@@ -40,13 +42,14 @@ def getBags(ownerId: str, mongo: PyMongo):
 
 def deleteBag(bagId: str, mongo: PyMongo):
     result = mongo.db.bags.delete_one({"_id": bagId})
-    return result
+    return result.deleted_count
 
 
 def addNewTrip(ownerId, trip: TripDto, collection, mongo: PyMongo):
     newTrip = {"_id": f"{ownerId}-{trip.tripName}", "ownerId": ownerId}
     newTrip.update(trip.__dict__)
-    mongo.db[collection].insert_one(newTrip)
+    result = mongo.db[collection].insert_one(newTrip)
+    return result.acknowledged
 
 
 def getTrips(ownerId: str, mongo: PyMongo):
@@ -56,11 +59,12 @@ def getTrips(ownerId: str, mongo: PyMongo):
 
 def deleteTrip(tripId: str, mongo: PyMongo):
     result = mongo.db.trips.delete_one({"_id": tripId})
-    return result
+    return result.deleted_count
 
 
 def addNewUser(user: UserDto, mongo: PyMongo):
-    mongo.db.users.insert_one(user.__dict__)
+    result = mongo.db.users.insert_one(user.__dict__)
+    return result.acknowledged
 
 
 def getUser(email: str, mongo: PyMongo):
@@ -70,3 +74,8 @@ def getUser(email: str, mongo: PyMongo):
     else:
         result = False
     return result
+
+
+def deleteUser(ownerId: str, mongo: PyMongo):
+    result = mongo.db.users.delete_one({'_id': ownerId})
+    return result.deleted_count

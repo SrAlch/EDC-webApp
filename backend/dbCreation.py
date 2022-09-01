@@ -2,12 +2,12 @@ from os.path import join, dirname, abspath
 import os
 import json
 import uuid
-from flask_pymongo import PyMongo
-from dbFunct import addNewItem
 from dtos.itemDto import ItemDto
+from flask_pymongo import PyMongo
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+from dbFunct import addNewItem
 
 DBFILLER_FOLDER = join(dirname(abspath(__file__)), "dbFiller")
 MONGO = PyMongo()

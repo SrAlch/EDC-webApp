@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 // Styles Module
-import {Button, Divider, IconButton, List, ListItem, Paper, Stack, TextField} from "@mui/material";
+import {Button, Chip, Divider, IconButton, List, ListItem, Paper, Stack, TextField} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
@@ -89,5 +89,28 @@ const ItemThumb: React.FC<ItemThumbType> = ({itemName, itemAmount, notes, catego
     </Paper>
 );
 
+const TripThumb: React.FC<TripThumbType> = (props) => {
 
-export {BagThumb, ItemThumb};
+    return(
+    <Paper elevation={4} >
+        <List>
+            <ListItem>Trip Name: {props.tripName}</ListItem>
+            <Divider />
+            <ListItem>Amount: {props.date}</ListItem>
+            <Divider />
+            <ListItem>Category: {props.destination}</ListItem>
+            <Divider />
+            <ListItem>Backpacks: {props.backpacks.map(backpack => (
+                <Chip sx={{backgroundColor: "#6ca5eff4"}} label={backpack} />
+            ))}</ListItem>
+            <Divider />
+            <ListItem>Items: {props.items.map(item => (
+                <Chip sx={{backgroundColor: "#6ca5eff4"}} label={item} />
+            ))}</ListItem>
+        </List>
+    </Paper>
+    )
+};
+
+
+export {BagThumb, ItemThumb, TripThumb};

@@ -1,4 +1,3 @@
-from datetime import date as dateFormat
 from dtos.bagDto import BagDto
 from dtos.itemDto import ItemDto
 from typing import List
@@ -10,89 +9,89 @@ from typing import List
 class TripDto:
     def __init__(self,
                  tripName: str,
-                 date: dateFormat,
+                 date: str,
                  destination: str,
-                 backpacks: List[str],
-                 items: List[str]):
-        self._location = tripName
-        self._date = date
-        self._destination = destination
-        self._backpacks = backpacks
-        self._items = items
+                 backpacks: List[BagDto],
+                 items: List[ItemDto]):
+        self.tripName = tripName
+        self.date = date
+        self.destination = destination
+        self.backpacks = backpacks
+        self.items = items
 
     @property
-    def tripName(self):
-        return self._tripName
+    def tripName_prop(self):
+        return self.tripName
 
-    @tripName.setter
-    def tripName(self, newtripName: str):
+    @tripName_prop.setter
+    def tripName_prop(self, newtripName: str):
         if len(newtripName) > 0:
-            self._tripName = newtripName
+            self.tripName = newtripName
         else:
             raise ValueError((f"{newtripName} is not a valid name for your"
                              " trip"))
 
-    @tripName.deleter
-    def tripName(self):
-        del self._tripName
+    @tripName_prop.deleter
+    def tripName_prop(self):
+        del self.tripName
 
     @property
-    def date(self):
-        return self._date
+    def date_prop(self):
+        return self.date
 
-    @date.setter
-    def date(self, newDate: dateFormat):
+    @date_prop.setter
+    def date_prop(self, newDate: str):
         if newDate:
-            self._date = newDate
+            self.date = newDate
         else:
             raise ValueError((f"{newDate} is not a valid date for your"
                              " trip"))
 
-    @date.deleter
-    def date(self):
-        del self._date
+    @date_prop.deleter
+    def date_prop(self):
+        del self.date
 
     @property
-    def destination(self):
-        return self._destination
+    def destination_prop(self):
+        return self.destination
 
-    @destination.setter
-    def destination(self, newdestination: str):
+    @destination_prop.setter
+    def destination_prop(self, newdestination: str):
         if len(newdestination) > 0:
-            self._destination = newdestination
+            self.destination = newdestination
         else:
             raise ValueError((f"{newdestination} is not a valid destination "
                              "for your trip"))
 
-    @destination.deleter
-    def destination(self):
-        del self._destination
+    @destination_prop.deleter
+    def destination_prop(self):
+        del self.destination
 
     @property
-    def backpacks(self):
-        return self._backpacks
+    def backpacks_prop(self):
+        return self.backpacks
 
-    @backpacks.setter
-    def backpacks(self, newBackpacks: List[BagDto]):
+    @backpacks_prop.setter
+    def backpacks_prop(self, newBackpacks: List[BagDto]):
         if len(newBackpacks) > 0:
-            self._backpacks = newBackpacks
+            self.backpacks = newBackpacks
 
-    @backpacks.deleter
-    def backpacks(self):
-        del self._backpacks
+    @backpacks_prop.deleter
+    def backpacks_prop(self):
+        del self.backpacks
 
     @property
-    def items(self):
-        return self._items
+    def items_prop(self):
+        return self.items
 
-    @items.setter
-    def items(self, newItems: List[ItemDto]):
+    @items_prop.setter
+    def items_prop(self, newItems: List[ItemDto]):
         if len(newItems) > 0:
-            self._items = newItems
+            self.items = newItems
         else:
             raise ValueError((f"{newItems} is not a valid item for your"
                              " trip"))
 
-    @items.deleter
-    def items(self):
-        del self._items
+    @items_prop.deleter
+    def items_prop(self):
+        del self.items

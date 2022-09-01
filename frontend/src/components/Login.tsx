@@ -5,7 +5,6 @@ import CloseIcon from '@mui/icons-material/Close'
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { UserContextType } from "../@types/context";
 
 
 function setOwnerId(access_token: string, email: string) {

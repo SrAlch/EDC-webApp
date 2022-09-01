@@ -9,24 +9,23 @@ from flask_jwt_extended import jwt_required
 tripsBlueprint = Blueprint('tripsBlueprint', __name__)
 
 
-@tripsBlueprint.route('/trips', methods=["GET"])
+@tripsBlueprint.route('/trips/<ownerId>', methods=["GET"])
 @jwt_required()
-def getBags():
-    ownerId = "328c141b-20d8-11ed-859d-50e085f3ef4d"
-    tripsDict = dbFunct.getBags(ownerId, MONGO)
-    return json_util.dumps(tripsDict)
+def getBags(ownerId: str):
+    tripsDict = dbFunct.getTrips(ownerId, MONGO)
+    return json_util.dumps(tripsDict), 200
 
 
 @tripsBlueprint.route('/trips', methods=["POST"])
 @jwt_required()
 def addNewBag():
-    uuidUser = request.json["uuidUser"]
+    ownerId = request.json["ownerId"]
     newTrip = TripDto(request.json["tripName"],
                       request.json["date"],
                       request.json["destination"],
                       request.json["backpacks"],
                       request.json["items"])
-    dbFunct.addNewTrip(uuidUser, newTrip, "bags", MONGO)
+    dbFunct.addNewTrip(ownerId, newTrip, "trips", MONGO)
     return (json.dumps({'success': True}),
             200,
             {'ContentType': 'application/json'})

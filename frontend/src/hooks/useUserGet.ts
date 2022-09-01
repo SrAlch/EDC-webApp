@@ -2,17 +2,17 @@ import {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 // Types
-import { Item } from "../@types/fetchingTypes";
+import { UserGet } from "../@types/fetchingTypes";
 
 
-export const useItemsFetch = () => {
-    const [items, setItems] = useState([] as Item[])
-    const ownerId = localStorage.getItem("ownerId")
+export const useUserGet = () => {
+    const [user, setUser] = useState({} as UserGet)
+    const email = localStorage.getItem("email")
     const accessToken = localStorage.getItem("access_token")
     const navigate = useNavigate();
 
     useEffect(() => {
-            fetch(`http://localhost:5000/items/${ownerId}`, {
+            fetch(`http://localhost:5000/profile/${email}`, {
             method :'GET',
             headers : {
                 'Content-Type':'application/json',
@@ -33,9 +33,9 @@ export const useItemsFetch = () => {
                         return response.json()
                     }
                 })            
-                .then(response => setItems(response))
-                .catch(error => console.log(error))             
+                .then(response => setUser(response))
+                .catch(error => console.log(error))            
     }, []);
 
-    return {items, setItems}
+    return {user, setUser}
 };

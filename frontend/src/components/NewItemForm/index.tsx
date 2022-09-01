@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Paper, Button, TextField, Box, TextareaAutosize } from "@mui/material";
 
 import { Item } from "../../@types/fetchingTypes";
+import { useNavigate } from "react-router-dom";
 
 type NewFormTypes = {
     status: boolean,
@@ -17,6 +18,7 @@ const NewItemForm: React.FC<NewFormTypes> = (props) => {
     const [notes, setNotes] = useState('')
     const [category, setCategory] = useState('')
     const ownerId: string = (localStorage.getItem("ownerId") || '')
+    const navigate = useNavigate();
     
  
     return (<Paper>
@@ -41,6 +43,7 @@ const NewItemForm: React.FC<NewFormTypes> = (props) => {
                 e.preventDefault();
                 const _id = `${ownerId}-${itemName}`
                 const data: Item = { _id, ownerId, itemName, itemAmount, notes, category }
+                
                 fetch('http://localhost:5000/items', {
                     method: 'POST',
                     headers: {
@@ -49,7 +52,21 @@ const NewItemForm: React.FC<NewFormTypes> = (props) => {
                     },
                     body: JSON.stringify(data)
                 })
-                    .then(response => response.json())
+                .then(response => {
+                    if(response.status === 401){
+                        try {
+                            localStorage.removeItem("ownerId")
+                            localStorage.removeItem("email")
+                            localStorage.removeItem("access_token")
+                            console.log("Session expired")
+                            navigate("/")
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    }else{
+                        return response.json()
+                    }
+                })
                     .catch(error => console.log(error))
                 props.itemList.push(data)
                 props.updatedItemList(props.itemList)

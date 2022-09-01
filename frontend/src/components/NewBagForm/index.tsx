@@ -18,6 +18,7 @@ const NewBagForm: React.FC<NewFormTypes> = (props) => {
     const [style, setStyle] = useState('' as Bag["style"])
     const [notes, setNotes] = useState('' as Bag["notes"])
     const ownerId: string = (localStorage.getItem("ownerId") || '')
+    const navigate = useNavigate();
 
 
     return (<Paper>
@@ -42,6 +43,7 @@ const NewBagForm: React.FC<NewFormTypes> = (props) => {
                 e.preventDefault();
                 const _id = `${ownerId}-${bagName}`
                 const data: Bag = { _id, ownerId, bagName, capacity, style, notes }
+                
                 fetch('http://localhost:5000/bags', {
                     method: 'POST',
                     headers: {
@@ -50,8 +52,22 @@ const NewBagForm: React.FC<NewFormTypes> = (props) => {
                     },
                     body: JSON.stringify(data)
                 })
-                    .then(response => response.json())
-                    .catch(error => console.log(error))
+                .then(response => {
+                    if(response.status === 401){
+                        try {
+                            localStorage.removeItem("ownerId")
+                            localStorage.removeItem("email")
+                            localStorage.removeItem("access_token")
+                            console.log("Session expired")
+                            navigate("/")
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    }else{
+                        return response.json()
+                    }
+                })
+                .catch(error => console.log(error))
                 props.bagList.push(data)
                 props.updatedBagList(props.bagList)
                 props.onChangedStatus(false)

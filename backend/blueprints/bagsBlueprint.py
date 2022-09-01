@@ -45,4 +45,3 @@ def deleteBag():
         return {"msg": "Record deleted"}, 200
     else:
         return {"msg": "An error has occured"}, 400
-

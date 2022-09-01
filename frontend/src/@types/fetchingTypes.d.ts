@@ -2,10 +2,10 @@ export type Trip = {
     _id: string
     ownerId: string,
     tripName: string,
-    date: Date,
+    date: string,
     destination: string,
-    backpacks: string[],
-    items: string[]
+    backpacks: Bag[],
+    items: Item[]
 }
 
 export type Bag = {
@@ -30,6 +30,14 @@ export type User = {
     userName: string,
     email: string,
     password: string,
+    phone: string,
+    homeCountry: string
+}
+
+export type UserGet = {
+    _id: string,
+    userName: string,
+    email: string,
     phone: string,
     homeCountry: string
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import internal from "stream";
+import { Trip, Bag } from "./fetchingTypes";
 
 export type ElementTitle = {
     header: string,
@@ -24,8 +25,10 @@ export type BagThumbType = {
 
 export type TripThumbType = {
     tripName: string,
-    date: Date,
+    date: string,
     destination: string,
     backpacks: string[],
     items: string[],
+    tripList: Trip,
+    updatedTripList: any
 }
